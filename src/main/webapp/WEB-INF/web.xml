@@ -4,7 +4,7 @@
               http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee">
-  <display-name>etcSite</display-name>
+  <display-name>etcsite</display-name>
   
   <!-- Servlets -->
 <servlet>
@@ -52,43 +52,43 @@
        -> Common pitfalls: for url-pattern help -->
   <servlet-mapping>
     <servlet-name>authenticationServlet</servlet-name>
-    <url-pattern>/etcSite/auth</url-pattern>
+    <url-pattern>/etcsite/auth</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>fileServlet</servlet-name>
-    <url-pattern>/etcSite/file</url-pattern>
+    <url-pattern>/etcsite/file</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>fileSearchServlet</servlet-name>
-    <url-pattern>/etcSite/fileSearch</url-pattern>
+    <url-pattern>/etcsite/fileSearch</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>fileAccessServlet</servlet-name>
-    <url-pattern>/etcSite/fileAccess</url-pattern>
+    <url-pattern>/etcsite/fileAccess</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>taskServlet</servlet-name>
-    <url-pattern>/etcSite/task</url-pattern>
+    <url-pattern>/etcsite/task</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>semanticMarkupServlet</servlet-name>
-    <url-pattern>/etcSite/semanticMarkup</url-pattern>
+    <url-pattern>/etcsite/semanticMarkup</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>matrixGenerationServlet</servlet-name>
-    <url-pattern>/etcSite/matrixGeneration</url-pattern>
+    <url-pattern>/etcsite/matrixGeneration</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>fileFormatServlet</servlet-name>
-    <url-pattern>/etcSite/fileFormat</url-pattern>
+    <url-pattern>/etcsite/fileFormat</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>userServlet</servlet-name>
-    <url-pattern>/etcSite/user</url-pattern>
+    <url-pattern>/etcsite/user</url-pattern>
   </servlet-mapping>
     <servlet-mapping>
     <servlet-name>setupServlet</servlet-name>
-    <url-pattern>/etcSite/setup</url-pattern>
+    <url-pattern>/etcsite/setup</url-pattern>
   </servlet-mapping> 
 
   
@@ -99,7 +99,7 @@
 
 	<servlet-mapping>
 	    <servlet-name>downloadServlet</servlet-name>
-	    <url-pattern>/etcSite/download/</url-pattern>
+	    <url-pattern>/etcsite/download/</url-pattern>
 	</servlet-mapping>
   
   
@@ -127,13 +127,22 @@
   </servlet-mapping>
   
   
-  <servlet>
+ <servlet>
   <servlet-name>remoteLoggingServiceImpl</servlet-name>
   <servlet-class>com.google.gwt.libideas.logging.server.RemoteLoggingServiceImpl</servlet-class>
 </servlet>
 <servlet-mapping>
   <servlet-name>remoteLoggingServiceImpl</servlet-name>
-  <url-pattern>/etcSite/logging</url-pattern>
+  <url-pattern>/etcsite/logging</url-pattern>
+</servlet-mapping>
+
+<servlet>
+  <servlet-name>jUnitHostImpl</servlet-name>
+  <servlet-class>com.google.gwt.junit.server.JUnitHostImpl</servlet-class>
+</servlet>
+<servlet-mapping>
+  <servlet-name>jUnitHostImpl</servlet-name>
+  <url-pattern>/etcsite/junithost/*</url-pattern>
 </servlet-mapping>
 
 
@@ -145,7 +154,7 @@
   
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>EtcSite.html</welcome-file>
+    <welcome-file>index.html</welcome-file>
   </welcome-file-list>
 
 </web-app>

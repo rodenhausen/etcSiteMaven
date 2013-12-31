@@ -10,7 +10,6 @@
   <artifactId>site</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>EtcSite</name>
 
   <properties>
     <!-- Convenience property to set the GWT version -->
@@ -115,6 +114,16 @@
 		<artifactId>gwt-incubator</artifactId>
 		<version>2.0.1</version>
 	</dependency>
+		<dependency>
+		<groupId>dom4j</groupId>
+		<artifactId>dom4j</artifactId>
+		<version>1.6.1</version>
+	</dependency>
+    <dependency>
+		<groupId>com.uwyn</groupId>
+		<artifactId>jhighlight</artifactId>
+		<version>1.0</version>
+	</dependency>
   </dependencies>
 
   <build>
@@ -134,16 +143,23 @@
               <goal>compile</goal>
               <!--<goal>test</goal>-->
               <!--<goal>i18n</goal>-->
-              <goal>generateAsync</goal>
+              <!--<goal>generateAsync</goal>-->
             </goals>
           </execution>
         </executions>
         <!-- Plugin configuration. There are many available options, see 
           gwt-maven-plugin documentation at codehaus.org -->
         <configuration>
-          <runTarget>EtcSite.html</runTarget>
+          <runTarget>index.html</runTarget>
           <hostedWebapp>${webappDirectory}</hostedWebapp>
           <!--<i18nMessagesBundle>edu.arizona.sirls.etc.site.client.Messages</i18nMessagesBundle>-->
+   		  <!-- needs to gather all dependencies through maven (e.g. charaparser, matrixgeneration)
+           and also the @RemoteServiceRelativePath annotation has to be on the implementation not interfaces 
+           https://github.com/gwt-maven-plugin/gwt-maven-plugin/pull/26-->
+          <!--<packageNamePerModule>
+            <edu.arizona.sirls.etc.site.EtcSite>edu.arizona.sirls.etc.site</edu.arizona.sirls.etc.site.EtcSite>
+          </packageNamePerModule>-->
+          <!-- <scanRemoteServiceRelativePathAnnotation>true</scanRemoteServiceRelativePathAnnotation> -->
         </configuration>
       </plugin>
 
