@@ -1,0 +1,18 @@
+package edu.arizona.sirls.etc.site.client.etcsite.menu;
+
+import com.google.gwt.user.client.ui.IsWidget;
+
+public interface IMenuView extends IsWidget {
+
+	public interface Presenter {
+		void onSemanticMarkup();
+		void onMatrixGeneration();
+		void onTreeGeneration();
+		void onTaxonomyComparison();
+		void onVisualization();
+	}
+	
+	void setPresenter(Presenter presenter);
+	void initNativeJavascriptAnimations();
+
+}
