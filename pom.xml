@@ -6,7 +6,7 @@
 
   <!-- POM file generated with GWT webAppCreator -->
   <modelVersion>4.0.0</modelVersion>
-  <groupId>edu.arizona.biosemantics.etc-site</groupId>
+  <groupId>edu.arizona.biosemantics.etcsite</groupId>
   <artifactId>etc-site</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
@@ -171,12 +171,12 @@
         <configuration>
           <runTarget>index.html</runTarget>
           <hostedWebapp>${webappDirectory}</hostedWebapp>
-          <!--<i18nMessagesBundle>edu.arizona.sirls.etc.site.client.Messages</i18nMessagesBundle>-->
+          <!--<i18nMessagesBundle>edu.arizona.biosemantics.etcsite.client.Messages</i18nMessagesBundle>-->
    		  <!-- needs to gather all dependencies through maven (e.g. charaparser, matrixgeneration)
            and also the @RemoteServiceRelativePath annotation has to be on the implementation not interfaces 
            https://github.com/gwt-maven-plugin/gwt-maven-plugin/pull/26-->
           <!--<packageNamePerModule>
-            <edu.arizona.sirls.etc.site.EtcSite>edu.arizona.sirls.etc.site</edu.arizona.sirls.etc.site.EtcSite>
+            <edu.arizona.biosemantics.etcsite.EtcSite>edu.arizona.biosemantics.etcsite</edu.arizona.biosemantics.etcsite.EtcSite>
           </packageNamePerModule>-->
           <!-- <scanRemoteServiceRelativePathAnnotation>true</scanRemoteServiceRelativePathAnnotation> -->
         </configuration>

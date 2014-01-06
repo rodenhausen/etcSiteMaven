@@ -9,43 +9,43 @@
   <!-- Servlets -->
 <servlet>
     <servlet-name>authenticationServlet</servlet-name>
-    <servlet-class>edu.arizona.sirls.etc.site.server.rpc.AuthenticationService</servlet-class>
+    <servlet-class>edu.arizona.biosemantics.etcsite.server.rpc.AuthenticationService</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>fileServlet</servlet-name>
-    <servlet-class>edu.arizona.sirls.etc.site.server.rpc.FileService</servlet-class>
+    <servlet-class>edu.arizona.biosemantics.etcsite.server.rpc.FileService</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>fileAccessServlet</servlet-name>
-    <servlet-class>edu.arizona.sirls.etc.site.server.rpc.FileAccessService</servlet-class>
+    <servlet-class>edu.arizona.biosemantics.etcsite.server.rpc.FileAccessService</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>fileSearchServlet</servlet-name>
-    <servlet-class>edu.arizona.sirls.etc.site.server.rpc.FileSearchService</servlet-class>
+    <servlet-class>edu.arizona.biosemantics.etcsite.server.rpc.FileSearchService</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>taskServlet</servlet-name>
-    <servlet-class>edu.arizona.sirls.etc.site.server.rpc.TaskService</servlet-class>
+    <servlet-class>edu.arizona.biosemantics.etcsite.server.rpc.TaskService</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>semanticMarkupServlet</servlet-name>
-    <servlet-class>edu.arizona.sirls.etc.site.server.rpc.SemanticMarkupService</servlet-class>
+    <servlet-class>edu.arizona.biosemantics.etcsite.server.rpc.SemanticMarkupService</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>matrixGenerationServlet</servlet-name>
-    <servlet-class>edu.arizona.sirls.etc.site.server.rpc.MatrixGenerationService</servlet-class>
+    <servlet-class>edu.arizona.biosemantics.etcsite.server.rpc.MatrixGenerationService</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>fileFormatServlet</servlet-name>
-    <servlet-class>edu.arizona.sirls.etc.site.server.rpc.FileFormatService</servlet-class>
+    <servlet-class>edu.arizona.biosemantics.etcsite.server.rpc.FileFormatService</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>userServlet</servlet-name>
-    <servlet-class>edu.arizona.sirls.etc.site.server.rpc.UserService</servlet-class>
+    <servlet-class>edu.arizona.biosemantics.etcsite.server.rpc.UserService</servlet-class>
   </servlet>
     <servlet>
     <servlet-name>setupServlet</servlet-name>
-    <servlet-class>edu.arizona.sirls.etc.site.server.rpc.SetupService</servlet-class>
+    <servlet-class>edu.arizona.biosemantics.etcsite.server.rpc.SetupService</servlet-class>
   </servlet>
   
   <!-- http://www.gwtproject.org/doc/latest/DevGuideServerCommunication.html#DevGuideImplementingServices
@@ -94,7 +94,7 @@
   
   <servlet>
    		<servlet-name>downloadServlet</servlet-name>
-    	<servlet-class>edu.arizona.sirls.etc.site.server.DownloadServlet</servlet-class>
+    	<servlet-class>edu.arizona.biosemantics.etcsite.server.DownloadServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -119,7 +119,7 @@
   <servlet>
     <servlet-name>uploadServlet</servlet-name>
     <!-- This is the default servlet, it puts files in session -->
-    <servlet-class>edu.arizona.sirls.etc.site.server.UploadServlet</servlet-class>
+    <servlet-class>edu.arizona.biosemantics.etcsite.server.UploadServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>uploadServlet</servlet-name>
@@ -148,7 +148,7 @@
 
   <listener>
   	<listener-class>
-  		edu.arizona.sirls.etc.site.server.ETCSiteServletContextListener
+  		edu.arizona.biosemantics.etcsite.server.ETCSiteServletContextListener
   	</listener-class>
   </listener>
   
