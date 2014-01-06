@@ -6,23 +6,32 @@
 
   <!-- POM file generated with GWT webAppCreator -->
   <modelVersion>4.0.0</modelVersion>
-  <groupId>edu.arizona.sirls.etc</groupId>
-  <artifactId>site</artifactId>
+  <groupId>edu.arizona.biosemantics.etc-site</groupId>
+  <artifactId>etc-site</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
 
   <properties>
-    <!-- Convenience property to set the GWT version -->
     <gwtVersion>2.5.0</gwtVersion>
     <!-- GWT needs at least java 1.5 -->
     <!-- But we need at least java 1.6 -->
     <maven.compiler.source>1.6</maven.compiler.source>
     <maven.compiler.target>1.6</maven.compiler.target>
-    
     <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
+  
+  <repositories>
+   		<repository>
+			<id>my.snapshots</id>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
+		</repository>
+		<repository>
+			<id>my.releases</id>
+			<url>http://localhost:8081/nexus/content/repositories/releases/</url>
+		</repository>
+	</repositories>
 
   <!-- Created from archetype -->
   <dependencies>
@@ -123,6 +132,16 @@
 		<groupId>com.uwyn</groupId>
 		<artifactId>jhighlight</artifactId>
 		<version>1.0</version>
+	</dependency>
+	<dependency>
+	  <groupId>edu.arizona.biosemantics.semanticmarkup</groupId>
+	  <artifactId>semantic-markup</artifactId>
+	  <version>0.1.5</version>
+	</dependency>
+	<dependency>
+	  <groupId>edu.arizona.biosemantics.matrixgeneration</groupId>
+	  <artifactId>matrix-generation</artifactId>
+	  <version>0.0.1-SNAPSHOT</version>
 	</dependency>
   </dependencies>
 
