@@ -4,10 +4,9 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Properties;
 
+import edu.arizona.biosemantics.semanticmarkup.MarkupMain;
 import edu.arizona.sirls.etc.site.server.Configuration;
 import edu.arizona.sirls.etc.site.shared.rpc.AuthenticationToken;
-
-import semanticMarkup.MarkupMain;
 
 public class Parse implements IParse {
 

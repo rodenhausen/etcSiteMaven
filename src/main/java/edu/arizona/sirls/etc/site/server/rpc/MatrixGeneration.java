@@ -16,7 +16,7 @@ public class MatrixGeneration implements Callable<Boolean> {
 	public Boolean call() throws Exception {
 		String[] args = { inputDir, outputFile };
 		try {
-			matrixgeneration.MatrixGeneration.main(args); 
+			edu.arizona.biosemantics.matrixgeneration.MatrixGeneration.main(args); 
 		} catch(Exception e) {
 			e.printStackTrace();
 			return false;

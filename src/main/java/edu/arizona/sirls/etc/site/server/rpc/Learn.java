@@ -5,7 +5,7 @@ import java.util.Properties;
 
 import org.apache.commons.cli.Option;
 
-import semanticMarkup.LearnMain;
+import edu.arizona.biosemantics.semanticmarkup.LearnMain;
 import edu.arizona.sirls.etc.site.server.Configuration;
 import edu.arizona.sirls.etc.site.shared.db.DatasetPrefix;
 import edu.arizona.sirls.etc.site.shared.db.DatasetPrefixDAO;
