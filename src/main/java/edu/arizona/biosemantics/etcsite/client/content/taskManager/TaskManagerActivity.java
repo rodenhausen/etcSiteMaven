@@ -1,12 +1,13 @@
 package edu.arizona.biosemantics.etcsite.client.content.taskManager;
 
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.activity.shared.MyAbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
 
-public class TaskManagerActivity extends AbstractActivity implements ITaskManagerView.Presenter {
+public class TaskManagerActivity extends MyAbstractActivity implements ITaskManagerView.Presenter {
 
 	private ITaskManagerView taskManagerView;
 	private PlaceController placeController;
@@ -45,6 +46,13 @@ public class TaskManagerActivity extends AbstractActivity implements ITaskManage
 
 	@Override
 	public void onResume(TaskData taskData) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void update() {
 		// TODO Auto-generated method stub
 		
 	}

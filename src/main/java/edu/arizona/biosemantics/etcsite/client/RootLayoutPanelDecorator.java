@@ -1,6 +1,7 @@
 package edu.arizona.biosemantics.etcsite.client;
 
 import com.google.gwt.activity.shared.ActivityManager;
+import com.google.gwt.activity.shared.MyActivityManager;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.inject.Inject;
@@ -12,7 +13,7 @@ public class RootLayoutPanelDecorator {
 
 	private IEtcSiteView etcSiteView;
 	private ActivityManager menuActivityManager;
-	private ActivityManager contentActivityManager;
+	private MyActivityManager contentActivityManager;
 	private PlaceHistoryHandler placeHistoryHandler;
 	private ActivityManager topActivityManager;
 
@@ -20,7 +21,7 @@ public class RootLayoutPanelDecorator {
 	public RootLayoutPanelDecorator(IEtcSiteView etcSiteView, 
 			@Named("Top")ActivityManager topActivityManager,
 			@Named("Menu")ActivityManager menuActivityManager,
-			@Named("Content")ActivityManager contentActivityManager,
+			@Named("Content")MyActivityManager contentActivityManager,
 			PlaceHistoryHandler placeHistoryHandler) {
 		this.etcSiteView = etcSiteView; 
 		this.topActivityManager = topActivityManager;

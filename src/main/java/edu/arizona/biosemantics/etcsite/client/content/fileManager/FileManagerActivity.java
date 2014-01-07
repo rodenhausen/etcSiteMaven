@@ -1,6 +1,7 @@
 package edu.arizona.biosemantics.etcsite.client.content.fileManager;
 
 import com.google.gwt.activity.shared.Activity;
+import com.google.gwt.activity.shared.MyActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
@@ -10,7 +11,7 @@ import edu.arizona.biosemantics.etcsite.client.common.files.IManagableFileTreeVi
 import edu.arizona.biosemantics.etcsite.client.content.fileManager.IFileManagerView.Presenter;
 import edu.arizona.biosemantics.etcsite.shared.file.FileFilter;
 
-public class FileManagerActivity implements Activity, Presenter {
+public class FileManagerActivity implements MyActivity, Presenter {
 
 	private PlaceController placeController;
 	private IManagableFileTreeView.Presenter managableFileTreePresenter;
@@ -39,5 +40,11 @@ public class FileManagerActivity implements Activity, Presenter {
 
 	@Override
 	public void onStop() { }
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

@@ -1,6 +1,7 @@
 package edu.arizona.biosemantics.etcsite.client.content.matrixGeneration;
 
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.activity.shared.MyAbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
@@ -12,7 +13,7 @@ import edu.arizona.biosemantics.etcsite.shared.rpc.RPCCallback;
 import edu.arizona.biosemantics.etcsite.shared.rpc.TaskTypeEnum;
 import edu.arizona.biosemantics.etcsite.shared.rpc.matrixGeneration.TaskStageEnum;
 
-public class MatrixGenerationActivity extends AbstractActivity {
+public class MatrixGenerationActivity extends MyAbstractActivity {
 
 	private ITaskServiceAsync taskService;
 	private MatrixGenerationPlace place;
@@ -20,6 +21,7 @@ public class MatrixGenerationActivity extends AbstractActivity {
 	private IMatrixGenerationProcessView.Presenter processPresenter;
 	private IMatrixGenerationReviewView.Presenter reviewPresenter;
 	private IMatrixGenerationOutputView.Presenter outputPresenter;
+	private AcceptsOneWidget panel;
 
 	@Inject
 	public MatrixGenerationActivity(ITaskServiceAsync taskService, 
@@ -36,6 +38,16 @@ public class MatrixGenerationActivity extends AbstractActivity {
 	
 	@Override
 	public void start(final AcceptsOneWidget panel, EventBus eventBus) {
+		this.panel = panel;
+		this.setStepWidget();
+	}
+
+	public void setPlace(MatrixGenerationPlace place) {
+		this.place = place;
+		setStepWidget();
+	}
+
+	private void setStepWidget() {
 		final Task task = place.getTask();
 		if(task == null) 
 			panel.setWidget(inputPresenter.getView());
@@ -70,8 +82,9 @@ public class MatrixGenerationActivity extends AbstractActivity {
 			});
 	}
 
-	public void setPlace(MatrixGenerationPlace place) {
-		this.place = place;
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
-
 }

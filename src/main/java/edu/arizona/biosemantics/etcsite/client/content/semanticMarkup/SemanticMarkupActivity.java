@@ -1,11 +1,13 @@
 package edu.arizona.biosemantics.etcsite.client.content.semanticMarkup;
 
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.activity.shared.MyAbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
 
 import edu.arizona.biosemantics.etcsite.client.common.Authentication;
+import edu.arizona.biosemantics.etcsite.client.content.matrixGeneration.MatrixGenerationPlace;
 import edu.arizona.biosemantics.etcsite.client.content.semanticMarkup.ISemanticMarkupInputView.Presenter;
 import edu.arizona.biosemantics.etcsite.shared.db.Task;
 import edu.arizona.biosemantics.etcsite.shared.rpc.ITaskServiceAsync;
@@ -13,7 +15,7 @@ import edu.arizona.biosemantics.etcsite.shared.rpc.RPCCallback;
 import edu.arizona.biosemantics.etcsite.shared.rpc.TaskTypeEnum;
 import edu.arizona.biosemantics.etcsite.shared.rpc.semanticMarkup.TaskStageEnum;
 
-public class SemanticMarkupActivity extends AbstractActivity {
+public class SemanticMarkupActivity extends MyAbstractActivity {
 
 	private ITaskServiceAsync taskService;
 	private SemanticMarkupPlace place;
@@ -23,6 +25,7 @@ public class SemanticMarkupActivity extends AbstractActivity {
 	private ISemanticMarkupReviewView.Presenter reviewPresenter;
 	private ISemanticMarkupParseView.Presenter parsePresenter;
 	private ISemanticMarkupOutputView.Presenter outputPresenter;
+	private AcceptsOneWidget panel;
 
 	@Inject
 	public SemanticMarkupActivity(
@@ -45,6 +48,15 @@ public class SemanticMarkupActivity extends AbstractActivity {
 
 	@Override
 	public void start(final AcceptsOneWidget panel, EventBus eventBus) {
+		this.panel = panel;
+		this.setStepWidget();
+	}
+
+	public void setPlace(SemanticMarkupPlace place) {
+		this.place = place;
+	}
+
+	private void setStepWidget() {
 		final Task task = place.getTask();
 		if(task == null) 
 			panel.setWidget(inputPresenter.getView());
@@ -87,8 +99,9 @@ public class SemanticMarkupActivity extends AbstractActivity {
 			});
 	}
 
-	public void setPlace(SemanticMarkupPlace place) {
-		this.place = place;
+	@Override
+	public void update() {
+		System.out.println("update");
 	}
 
 }

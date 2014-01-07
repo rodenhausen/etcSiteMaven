@@ -1,6 +1,7 @@
 package edu.arizona.biosemantics.etcsite.client.content.home;
 
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.activity.shared.MyAbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
@@ -14,7 +15,7 @@ import edu.arizona.biosemantics.etcsite.client.content.treeGeneration.TreeGenera
 import edu.arizona.biosemantics.etcsite.client.content.visualization.VisualizationPlace;
 import edu.arizona.biosemantics.etcsite.client.menu.IStartMenuView;
 
-public class HomeActivity extends AbstractActivity implements IStartMenuView.Presenter, IHomeContentView.Presenter {
+public class HomeActivity extends MyAbstractActivity implements IStartMenuView.Presenter, IHomeContentView.Presenter {
 
     private PlaceController placeController;
 	private IHomeContentView homeContentView;
@@ -59,5 +60,11 @@ public class HomeActivity extends AbstractActivity implements IStartMenuView.Pre
 	@Override
 	public void onTreeGeneration() {
 		placeController.goTo(new TreeGenerationPlace());
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 }

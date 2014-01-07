@@ -2,6 +2,8 @@ package edu.arizona.biosemantics.etcsite.client.layout;
 
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
+import com.google.gwt.activity.shared.MyActivity;
+import com.google.gwt.activity.shared.MyActivityMapper;
 import com.google.gwt.place.shared.Place;
 import com.google.inject.Inject;
 
@@ -23,7 +25,7 @@ import edu.arizona.biosemantics.etcsite.client.content.taskManager.TaskManagerAc
 import edu.arizona.biosemantics.etcsite.client.content.taskManager.TaskManagerPlace;
 import edu.arizona.biosemantics.etcsite.client.top.LoggedOutPlace;
 
-public class ContentActivityMapper implements ActivityMapper {
+public class ContentActivityMapper implements MyActivityMapper {
 
 	private HelpActivity helpActivity;
 	private HomeActivity homeActivity;
@@ -34,7 +36,7 @@ public class ContentActivityMapper implements ActivityMapper {
 	private MatrixGenerationActivity matrixGenerationActivity;
 	private AnnotationReviewActivity annotationReviewActivity;
 	
-	private Activity currentActivity;
+	private MyActivity currentActivity;
 
 	@Inject
 	public ContentActivityMapper(HelpActivity helpActivity, HomeActivity homeActivity, SettingsActivity settingsActivity, TaskManagerActivity taskManagerActivity,
@@ -52,7 +54,7 @@ public class ContentActivityMapper implements ActivityMapper {
 	}
 
 	@Override
-	public Activity getActivity(Place place) {
+	public MyActivity getActivity(Place place) {
 		if(currentActivity == null)
 			currentActivity = homeActivity;
 		

@@ -1,12 +1,13 @@
 package edu.arizona.biosemantics.etcsite.client.content.settings;
 
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.activity.shared.MyAbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
 
-public class SettingsActivity extends AbstractActivity implements ISettingsView.Presenter {
+public class SettingsActivity extends MyAbstractActivity implements ISettingsView.Presenter {
 
 	private ISettingsView settingsView;
 	private PlaceController placeController;
@@ -27,6 +28,13 @@ public class SettingsActivity extends AbstractActivity implements ISettingsView.
 	@Override
 	public void onSubmit() {
 		//TODO
+	}
+
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -2,6 +2,8 @@ package edu.arizona.biosemantics.etcsite.client;
 
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
+import com.google.gwt.activity.shared.MyActivityManager;
+import com.google.gwt.activity.shared.MyActivityMapper;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
@@ -205,13 +207,13 @@ public class ClientModule extends AbstractGinModule {
 			to(TopActivityMapper.class).in(Singleton.class);
 		bind(ActivityMapper.class).annotatedWith(Names.named("Menu")).
 			to(MenuActivityMapper.class).in(Singleton.class);
-		bind(ActivityMapper.class).annotatedWith(Names.named("Content")).
+		bind(MyActivityMapper.class).annotatedWith(Names.named("Content")).
 			to(ContentActivityMapper.class).in(Singleton.class);
 		bind(ActivityManager.class).annotatedWith(Names.named("Top")).
 			toProvider(TopActivityManagerProvider.class).in(Singleton.class);
 		bind(ActivityManager.class).annotatedWith(Names.named("Menu")).
 			toProvider(MenuActivityManagerProvider.class).in(Singleton.class);
-		bind(ActivityManager.class).annotatedWith(Names.named("Content")).
+		bind(MyActivityManager.class).annotatedWith(Names.named("Content")).
 			toProvider(ContentActivityManagerProvider.class).in(Singleton.class);
 		bind(PlaceHistoryMapper.class).to(MyPlaceHistoryMapper.class).in(Singleton.class);
 		bind(PlaceHistoryHandler.class).toProvider(PlaceHistoryHandlerProvider.class).in(Singleton.class);
