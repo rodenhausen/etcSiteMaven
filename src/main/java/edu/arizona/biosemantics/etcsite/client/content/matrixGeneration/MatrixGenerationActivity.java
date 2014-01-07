@@ -16,12 +16,12 @@ import edu.arizona.biosemantics.etcsite.shared.rpc.matrixGeneration.TaskStageEnu
 public class MatrixGenerationActivity extends MyAbstractActivity {
 
 	private ITaskServiceAsync taskService;
-	private MatrixGenerationPlace place;
 	private IMatrixGenerationInputView.Presenter inputPresenter;
 	private IMatrixGenerationProcessView.Presenter processPresenter;
 	private IMatrixGenerationReviewView.Presenter reviewPresenter;
 	private IMatrixGenerationOutputView.Presenter outputPresenter;
 	private AcceptsOneWidget panel;
+	private Task task;
 
 	@Inject
 	public MatrixGenerationActivity(ITaskServiceAsync taskService, 
@@ -42,13 +42,16 @@ public class MatrixGenerationActivity extends MyAbstractActivity {
 		this.setStepWidget();
 	}
 
-	public void setPlace(MatrixGenerationPlace place) {
-		this.place = place;
-		setStepWidget();
+	@Override
+	public void update() {
+		this.setStepWidget();
+	}
+	
+	public void setTask(Task task) {
+		this.task = task;
 	}
 
 	private void setStepWidget() {
-		final Task task = place.getTask();
 		if(task == null) 
 			panel.setWidget(inputPresenter.getView());
 		else 
@@ -82,9 +85,5 @@ public class MatrixGenerationActivity extends MyAbstractActivity {
 			});
 	}
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

@@ -71,11 +71,11 @@ public class ContentActivityMapper implements MyActivityMapper {
 		if(place instanceof FileManagerPlace)
 			currentActivity = fileManagerActivity;
 		if(place instanceof SemanticMarkupPlace) {
-			semanticMarkupActivity.setPlace((SemanticMarkupPlace)place);
+			semanticMarkupActivity.setTask(((SemanticMarkupPlace) place).getTask());
 			currentActivity = semanticMarkupActivity;
 		}
 		if(place instanceof MatrixGenerationPlace) {
-			matrixGenerationActivity.setPlace((MatrixGenerationPlace)place);
+			matrixGenerationActivity.setTask(((MatrixGenerationPlace)place).getTask());
 			currentActivity = matrixGenerationActivity;
 		}
 		if(place instanceof AnnotationReviewPlace)

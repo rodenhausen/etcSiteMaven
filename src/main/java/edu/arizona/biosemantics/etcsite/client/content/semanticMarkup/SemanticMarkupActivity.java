@@ -1,13 +1,11 @@
 package edu.arizona.biosemantics.etcsite.client.content.semanticMarkup;
 
-import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.activity.shared.MyAbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
 
 import edu.arizona.biosemantics.etcsite.client.common.Authentication;
-import edu.arizona.biosemantics.etcsite.client.content.matrixGeneration.MatrixGenerationPlace;
 import edu.arizona.biosemantics.etcsite.client.content.semanticMarkup.ISemanticMarkupInputView.Presenter;
 import edu.arizona.biosemantics.etcsite.shared.db.Task;
 import edu.arizona.biosemantics.etcsite.shared.rpc.ITaskServiceAsync;
@@ -18,7 +16,6 @@ import edu.arizona.biosemantics.etcsite.shared.rpc.semanticMarkup.TaskStageEnum;
 public class SemanticMarkupActivity extends MyAbstractActivity {
 
 	private ITaskServiceAsync taskService;
-	private SemanticMarkupPlace place;
 	private ISemanticMarkupInputView.Presenter inputPresenter;
 	private ISemanticMarkupPreprocessView.Presenter preprocessPresenter;
 	private ISemanticMarkupLearnView.Presenter learnPresenter;
@@ -26,6 +23,7 @@ public class SemanticMarkupActivity extends MyAbstractActivity {
 	private ISemanticMarkupParseView.Presenter parsePresenter;
 	private ISemanticMarkupOutputView.Presenter outputPresenter;
 	private AcceptsOneWidget panel;
+	private Task task;
 
 	@Inject
 	public SemanticMarkupActivity(
@@ -51,13 +49,17 @@ public class SemanticMarkupActivity extends MyAbstractActivity {
 		this.panel = panel;
 		this.setStepWidget();
 	}
+	
+	@Override
+	public void update() {
+		this.setStepWidget();
+	}
 
-	public void setPlace(SemanticMarkupPlace place) {
-		this.place = place;
+	public void setTask(Task task) {
+		this.task = task;
 	}
 
 	private void setStepWidget() {
-		final Task task = place.getTask();
 		if(task == null) 
 			panel.setWidget(inputPresenter.getView());
 		else 
@@ -99,9 +101,5 @@ public class SemanticMarkupActivity extends MyAbstractActivity {
 			});
 	}
 
-	@Override
-	public void update() {
-		System.out.println("update");
-	}
 
 }
