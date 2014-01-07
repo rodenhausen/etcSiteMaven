@@ -43,8 +43,8 @@ public class Configuration extends edu.arizona.biosemantics.etcsite.client.commo
 			databaseHost = properties.getProperty("databaseHost");
 			databasePort = properties.getProperty("databasePort");
 			
-			charaparser_wordnet = properties.getProperty("charaparser_resources").replaceAll("/", Matcher.quoteReplacement(File.separator));
-			charaparser_perl = properties.getProperty("charaparser_src").replaceAll("/", Matcher.quoteReplacement(File.separator));	
+			charaparser_wordnet = properties.getProperty("charaparser_wordnet").replaceAll("/", Matcher.quoteReplacement(File.separator));
+			charaparser_perl = properties.getProperty("charaparser_perl").replaceAll("/", Matcher.quoteReplacement(File.separator));	
 			charaparser_tempFileBase = properties.getProperty("charaparser_tempFileBase").replaceAll("/", Matcher.quoteReplacement(File.separator));				
 			taxonDescriptionSchemaFile = properties.getProperty("taxonDescriptionSchemaFile").replaceAll("/", Matcher.quoteReplacement(File.separator));
 			markedUpTaxonDescriptionSchemaFile = properties.getProperty("markedUpTaxonDescriptionSchemaFile").replaceAll("/", Matcher.quoteReplacement(File.separator));
