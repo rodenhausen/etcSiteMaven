@@ -5,10 +5,10 @@ import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 import com.google.inject.Inject;
 
-import edu.arizona.biosemantics.etcsite.client.etcsite.top.LoggedInActivity;
-import edu.arizona.biosemantics.etcsite.client.etcsite.top.LoggedInPlace;
-import edu.arizona.biosemantics.etcsite.client.etcsite.top.LoggedOutActivity;
-import edu.arizona.biosemantics.etcsite.client.etcsite.top.LoggedOutPlace;
+import edu.arizona.biosemantics.etcsite.client.top.LoggedInActivity;
+import edu.arizona.biosemantics.etcsite.client.top.LoggedInPlace;
+import edu.arizona.biosemantics.etcsite.client.top.LoggedOutActivity;
+import edu.arizona.biosemantics.etcsite.client.top.LoggedOutPlace;
 
 public class TopActivityMapper implements ActivityMapper {
 

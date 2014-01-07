@@ -1,4 +1,4 @@
-package edu.arizona.biosemantics.etcsite.client.etcsite.top;
+package edu.arizona.biosemantics.etcsite.client.top;
 
 import java.util.Map;
 
@@ -17,7 +17,7 @@ import edu.arizona.biosemantics.etcsite.client.content.home.HomePlace;
 import edu.arizona.biosemantics.etcsite.client.content.settings.SettingsPlace;
 import edu.arizona.biosemantics.etcsite.client.content.taskManager.ResumableTasksEvent;
 import edu.arizona.biosemantics.etcsite.client.content.taskManager.TaskManagerPlace;
-import edu.arizona.biosemantics.etcsite.client.etcsite.top.ITopView.Presenter;
+import edu.arizona.biosemantics.etcsite.client.top.ITopView.Presenter;
 import edu.arizona.biosemantics.etcsite.shared.db.Task;
 import edu.arizona.biosemantics.etcsite.shared.rpc.ITaskServiceAsync;
 import edu.arizona.biosemantics.etcsite.shared.rpc.RPCCallback;

@@ -12,7 +12,7 @@ import edu.arizona.biosemantics.etcsite.client.content.semanticMarkup.SemanticMa
 import edu.arizona.biosemantics.etcsite.client.content.taxonomyComparison.TaxonomyComparisonPlace;
 import edu.arizona.biosemantics.etcsite.client.content.treeGeneration.TreeGenerationPlace;
 import edu.arizona.biosemantics.etcsite.client.content.visualization.VisualizationPlace;
-import edu.arizona.biosemantics.etcsite.client.etcsite.menu.IStartMenuView;
+import edu.arizona.biosemantics.etcsite.client.menu.IStartMenuView;
 
 public class HomeActivity extends AbstractActivity implements IStartMenuView.Presenter, IHomeContentView.Presenter {
 

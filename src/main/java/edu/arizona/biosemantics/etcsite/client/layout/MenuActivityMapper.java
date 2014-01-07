@@ -5,10 +5,10 @@ import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 import com.google.inject.Inject;
 
-import edu.arizona.biosemantics.etcsite.client.etcsite.menu.MenuActivity;
-import edu.arizona.biosemantics.etcsite.client.etcsite.menu.MenuPlace;
-import edu.arizona.biosemantics.etcsite.client.etcsite.menu.StartMenuActivity;
-import edu.arizona.biosemantics.etcsite.client.etcsite.menu.StartMenuPlace;
+import edu.arizona.biosemantics.etcsite.client.menu.MenuActivity;
+import edu.arizona.biosemantics.etcsite.client.menu.MenuPlace;
+import edu.arizona.biosemantics.etcsite.client.menu.StartMenuActivity;
+import edu.arizona.biosemantics.etcsite.client.menu.StartMenuPlace;
 
 public class MenuActivityMapper implements ActivityMapper {
 	

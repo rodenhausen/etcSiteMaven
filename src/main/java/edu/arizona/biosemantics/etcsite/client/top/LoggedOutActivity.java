@@ -1,4 +1,4 @@
-package edu.arizona.biosemantics.etcsite.client.etcsite.top;
+package edu.arizona.biosemantics.etcsite.client.top;
 
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
@@ -8,7 +8,7 @@ import com.google.inject.Inject;
 
 import edu.arizona.biosemantics.etcsite.client.common.Authentication;
 import edu.arizona.biosemantics.etcsite.client.content.help.HelpPlace;
-import edu.arizona.biosemantics.etcsite.client.etcsite.top.ILoginTopView.Presenter;
+import edu.arizona.biosemantics.etcsite.client.top.ILoginTopView.Presenter;
 import edu.arizona.biosemantics.etcsite.shared.rpc.AuthenticationResult;
 import edu.arizona.biosemantics.etcsite.shared.rpc.IAuthenticationServiceAsync;
 import edu.arizona.biosemantics.etcsite.shared.rpc.RPCCallback;

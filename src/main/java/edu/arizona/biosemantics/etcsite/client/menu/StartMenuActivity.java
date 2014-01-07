@@ -1,11 +1,11 @@
-package edu.arizona.biosemantics.etcsite.client.etcsite.menu;
+package edu.arizona.biosemantics.etcsite.client.menu;
 
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
 
-import edu.arizona.biosemantics.etcsite.client.etcsite.menu.IStartMenuView.Presenter;
+import edu.arizona.biosemantics.etcsite.client.menu.IStartMenuView.Presenter;
 
 public class StartMenuActivity extends AbstractActivity implements Presenter {
 

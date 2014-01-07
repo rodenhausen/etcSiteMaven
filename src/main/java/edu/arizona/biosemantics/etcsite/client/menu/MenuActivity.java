@@ -1,4 +1,4 @@
-package edu.arizona.biosemantics.etcsite.client.etcsite.menu;
+package edu.arizona.biosemantics.etcsite.client.menu;
 
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
@@ -15,7 +15,7 @@ import edu.arizona.biosemantics.etcsite.client.content.taskManager.ResumeTaskPla
 import edu.arizona.biosemantics.etcsite.client.content.taxonomyComparison.TaxonomyComparisonPlace;
 import edu.arizona.biosemantics.etcsite.client.content.treeGeneration.TreeGenerationPlace;
 import edu.arizona.biosemantics.etcsite.client.content.visualization.VisualizationPlace;
-import edu.arizona.biosemantics.etcsite.client.etcsite.menu.IMenuView.Presenter;
+import edu.arizona.biosemantics.etcsite.client.menu.IMenuView.Presenter;
 import edu.arizona.biosemantics.etcsite.shared.db.Task;
 import edu.arizona.biosemantics.etcsite.shared.rpc.IMatrixGenerationServiceAsync;
 import edu.arizona.biosemantics.etcsite.shared.rpc.ISemanticMarkupServiceAsync;

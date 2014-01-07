@@ -1,4 +1,4 @@
-package edu.arizona.biosemantics.etcsite.client.etcsite.menu;
+package edu.arizona.biosemantics.etcsite.client.menu;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;

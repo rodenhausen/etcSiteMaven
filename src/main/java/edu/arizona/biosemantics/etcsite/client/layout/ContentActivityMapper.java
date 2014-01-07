@@ -21,7 +21,7 @@ import edu.arizona.biosemantics.etcsite.client.content.settings.SettingsActivity
 import edu.arizona.biosemantics.etcsite.client.content.settings.SettingsPlace;
 import edu.arizona.biosemantics.etcsite.client.content.taskManager.TaskManagerActivity;
 import edu.arizona.biosemantics.etcsite.client.content.taskManager.TaskManagerPlace;
-import edu.arizona.biosemantics.etcsite.client.etcsite.top.LoggedOutPlace;
+import edu.arizona.biosemantics.etcsite.client.top.LoggedOutPlace;
 
 public class ContentActivityMapper implements ActivityMapper {
 

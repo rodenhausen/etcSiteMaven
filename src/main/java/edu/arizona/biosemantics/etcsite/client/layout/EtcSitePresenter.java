@@ -4,10 +4,10 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
 
 import edu.arizona.biosemantics.etcsite.client.content.home.IHomeContentView;
-import edu.arizona.biosemantics.etcsite.client.etcsite.menu.IMenuView;
-import edu.arizona.biosemantics.etcsite.client.etcsite.menu.IStartMenuView;
-import edu.arizona.biosemantics.etcsite.client.etcsite.top.ILoginTopView;
-import edu.arizona.biosemantics.etcsite.client.etcsite.top.ITopView;
+import edu.arizona.biosemantics.etcsite.client.menu.IMenuView;
+import edu.arizona.biosemantics.etcsite.client.menu.IStartMenuView;
+import edu.arizona.biosemantics.etcsite.client.top.ILoginTopView;
+import edu.arizona.biosemantics.etcsite.client.top.ITopView;
 
 public class EtcSitePresenter implements IEtcSiteView.Presenter, IMenuView.Presenter, IStartMenuView.Presenter, IHomeContentView.Presenter, ITopView.Presenter, ILoginTopView.Presenter {
 
