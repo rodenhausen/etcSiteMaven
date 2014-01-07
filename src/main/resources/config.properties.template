@@ -6,10 +6,10 @@ databaseHost=
 databasePort=
 
 #Charaparser
-charaparser_resources=/home/sirls/hongcui/etcsite/charaparser/resources
-charaparser_src=/home/sirls/hongcui/etcsite/charaparser/src
-taxonDescriptionSchemaFile=/home/sirls/hongcui/etcsite/charaparser/resources/io/schemas/iplantInputTreatment.xsd
-markedUpTaxonDescriptionSchemaFile=/home/sirls/hongcui/etcsite/charaparser/resources/io/schemas/iplantOutputTreatment.xsd
+charaparser_wordnet=/home/sirls/hongcui/charaparser/wordnet/wn31/dict
+charaparser_perl=/home/sirls/hongcui/charaparser/src/main/perl
+taxonDescriptionSchemaFile=/home/sirls/hongcui/etc-site/src/main/resources/edu/arizona/biosemantics/etcsite/server/rpc/io/iplantInputTreatment.xsd
+markedUpTaxonDescriptionSchemaFile=/home/sirls/hongcui/etc-site/src/main/resources/edu/arizona/biosemantics/etcsite/server/rpc/io/iplantOutputTreatment.xsd
 otoLiteURL=http://biosemantics.arizona.edu:8080/OTOLite/?origin=etcsite&embed=true
 charaparser_tempFileBase=/var/lib/tomcat5/apache-tomcat-5.5.28/webapps/temp/charaparser
 

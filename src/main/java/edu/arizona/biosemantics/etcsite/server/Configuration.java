@@ -14,8 +14,8 @@ public class Configuration extends edu.arizona.biosemantics.etcsite.client.commo
 	public static String databasePort;
 	
 	/** Charaparser **/
-	public static String charaparser_resources;
-	public static String charaparser_src;
+	public static String charaparser_wordnet;
+	public static String charaparser_perl;
 	public static String charaparser_tempFileBase;
 	public static String taxonDescriptionSchemaFile;
 	public static String markedUpTaxonDescriptionSchemaFile;
@@ -43,9 +43,8 @@ public class Configuration extends edu.arizona.biosemantics.etcsite.client.commo
 			databaseHost = properties.getProperty("databaseHost");
 			databasePort = properties.getProperty("databasePort");
 			
-			charaparser_resources = properties.getProperty("charaparser_resources");
-			charaparser_resources = charaparser_resources.replaceAll("/", Matcher.quoteReplacement(File.separator));	
-			charaparser_src = properties.getProperty("charaparser_src").replaceAll("/", Matcher.quoteReplacement(File.separator));	
+			charaparser_wordnet = properties.getProperty("charaparser_resources").replaceAll("/", Matcher.quoteReplacement(File.separator));
+			charaparser_perl = properties.getProperty("charaparser_src").replaceAll("/", Matcher.quoteReplacement(File.separator));	
 			charaparser_tempFileBase = properties.getProperty("charaparser_tempFileBase").replaceAll("/", Matcher.quoteReplacement(File.separator));				
 			taxonDescriptionSchemaFile = properties.getProperty("taxonDescriptionSchemaFile").replaceAll("/", Matcher.quoteReplacement(File.separator));
 			markedUpTaxonDescriptionSchemaFile = properties.getProperty("markedUpTaxonDescriptionSchemaFile").replaceAll("/", Matcher.quoteReplacement(File.separator));

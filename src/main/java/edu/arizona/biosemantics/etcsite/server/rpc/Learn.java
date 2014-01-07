@@ -41,12 +41,12 @@ public class Learn implements ILearn {
 		String databaseHost = Configuration.databaseHost;
 		String databasePort = Configuration.databasePort;
 		String workspace = Configuration.charaparser_tempFileBase;
-		String resources = Configuration.charaparser_resources;
-		String src = Configuration.charaparser_src;
+		String wordnet = Configuration.charaparser_wordnet;
+		String perl = Configuration.charaparser_perl;
 		String debugFile = workspace + File.separator + tablePrefix + File.separator + "debug.log";
 		String errorFile = workspace + File.separator + tablePrefix + File.separator + "error.log";
 		fileService.createDirectory(new AdminAuthenticationToken(), workspace, tablePrefix);
-		String[] args = new String[] { "-a", workspace, "-f", source, "-g", user, "-j", bioportalUserId, "-k", bioportalAPIKey, "-b", debugFile, "-e", errorFile, "-c", config, "-r", resources, "-l", src,
+		String[] args = new String[] { "-a", workspace, "-f", source, "-g", user, "-j", bioportalUserId, "-k", bioportalAPIKey, "-b", debugFile, "-e", errorFile, "-c", config, "-w", wordnet, "-l", perl,
 				"-n", databaseHost, "-p", databasePort, "-d", databaseName, "-u", databaseUser, 
 				"-s", databasePassword, "-i", input, "-z" , tablePrefix, "-y"};
 		LearnMain.main(args);
