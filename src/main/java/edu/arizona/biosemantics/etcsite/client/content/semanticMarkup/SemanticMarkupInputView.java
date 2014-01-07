@@ -11,10 +11,13 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-//import semanticMarkup.know.Glossary;
 
 public class SemanticMarkupInputView extends Composite implements ISemanticMarkupInputView {
 
+	private enum Glossary {
+		Plant, Hymenoptera, Algae, Porifera, Fossil
+	}
+	
 	private static SemanticmarkupInputViewUiBinder uiBinder = GWT
 			.create(SemanticmarkupInputViewUiBinder.class);
 
@@ -44,9 +47,9 @@ public class SemanticMarkupInputView extends Composite implements ISemanticMarku
 	
 	public SemanticMarkupInputView() {
 		initWidget(uiBinder.createAndBindUi(this));
-		/*for(Glossary glossary : Glossary.values()) {
+		for(Glossary glossary : Glossary.values()) {
 			this.glossaryListBox.addItem(glossary.toString());
-		}*/
+		}
 	}
 
 	@Override
