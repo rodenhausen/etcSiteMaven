@@ -24,6 +24,7 @@ public class SemanticMarkupReviewPresenter implements ISemanticMarkupReviewView.
 			ISemanticMarkupServiceAsync semanticMarkupService,
 			PlaceController placeController) {
 		this.view = view;
+		view.setPresenter(this);
 		this.placeController = placeController;
 		this.semanticMarkupService = semanticMarkupService;
 		initIFrameMessaging();
