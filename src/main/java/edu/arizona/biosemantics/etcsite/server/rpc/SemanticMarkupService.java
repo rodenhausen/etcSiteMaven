@@ -117,8 +117,13 @@ public class SemanticMarkupService extends RemoteServiceServlet implements ISema
 			task.setTaskConfiguration(semanticMarkupConfiguration);
 			task.setTaskType(dbTaskType);
 
-			task = TaskDAO.getInstance().addTask(task);			
+			task = TaskDAO.getInstance().addTask(task);
 			taskStage = TaskStageDAO.getInstance().getSemanticMarkupTaskStage(TaskStageEnum.PREPROCESS_TEXT.toString());
+			List<PreprocessedDescription> result = this.getPreprocessedDescriptions(authenticationToken, task);
+			if(result == null)
+				return new RPCResult<Task>(false, "Not a compatible task");
+			if(result.isEmpty())
+				taskStage = TaskStageDAO.getInstance().getSemanticMarkupTaskStage(TaskStageEnum.LEARN_TERMS.toString());
 			task.setTaskStage(taskStage);
 			TaskDAO.getInstance().updateTask(task);
 
@@ -130,41 +135,49 @@ public class SemanticMarkupService extends RemoteServiceServlet implements ISema
 		}
 	}
 	
+	private List<PreprocessedDescription> getPreprocessedDescriptions(AuthenticationToken authenticationToken, Task task) {
+		List<PreprocessedDescription> result = new LinkedList<PreprocessedDescription>();
+		final AbstractTaskConfiguration configuration = task.getConfiguration();
+		if(!(configuration instanceof SemanticMarkupConfiguration))
+			return null;
+		final SemanticMarkupConfiguration semanticMarkupConfiguration = (SemanticMarkupConfiguration)configuration;
+		String inputDirectory = semanticMarkupConfiguration.getInput();
+		
+		RPCResult<Boolean> isDirectoryResult = fileService.isDirectory(authenticationToken, inputDirectory);
+		if(isDirectoryResult.isSucceeded() && isDirectoryResult.getData()) {
+			RPCResult<List<String>> resultDirectoryFiles = fileService.getDirectoriesFiles(authenticationToken, inputDirectory);
+			if(resultDirectoryFiles.isSucceeded()) {
+				for(String file : resultDirectoryFiles.getData()) {
+					RPCResult<String> descriptionResult = getDescription(authenticationToken, inputDirectory + File.separator + file);
+					if(descriptionResult.isSucceeded()) {
+						String description = descriptionResult.getData();
+						if(!bracketValidator.validate(description)) {
+							PreprocessedDescription preprocessedDescription = new PreprocessedDescription(
+									inputDirectory + File.separator + file,
+									file, 0,
+									bracketValidator.getBracketCountDifferences(description));
+							result.add(preprocessedDescription);
+						}	
+					}
+				}
+			}
+		}
+		return result;
+	}
+	
 	@Override
 	public RPCResult<List<PreprocessedDescription>> preprocess(AuthenticationToken authenticationToken, Task task) {	
 		try {
-			List<PreprocessedDescription> result = new LinkedList<PreprocessedDescription>();
 			TaskType taskType = TaskTypeDAO.getInstance().getTaskType(edu.arizona.biosemantics.etcsite.shared.rpc.TaskTypeEnum.SEMANTIC_MARKUP);
 			TaskStage taskStage = TaskStageDAO.getInstance().getSemanticMarkupTaskStage(TaskStageEnum.PREPROCESS_TEXT.toString());
 			task.setTaskStage(taskStage);
 			TaskDAO.getInstance().updateTask(task);
 			//do preprocessing here, return result immediately or always only return an invocation
 			//and make user come back when ready?
-			final AbstractTaskConfiguration configuration = task.getConfiguration();
-			if(!(configuration instanceof SemanticMarkupConfiguration))
-				return new RPCResult<List<PreprocessedDescription>>(false, "Not a compatible task");
-			final SemanticMarkupConfiguration semanticMarkupConfiguration = (SemanticMarkupConfiguration)configuration;
-			String inputDirectory = semanticMarkupConfiguration.getInput();
 			
-			RPCResult<Boolean> isDirectoryResult = fileService.isDirectory(authenticationToken, inputDirectory);
-			if(isDirectoryResult.isSucceeded() && isDirectoryResult.getData()) {
-				RPCResult<List<String>> resultDirectoryFiles = fileService.getDirectoriesFiles(authenticationToken, inputDirectory);
-				if(resultDirectoryFiles.isSucceeded()) {
-					for(String file : resultDirectoryFiles.getData()) {
-						RPCResult<String> descriptionResult = getDescription(authenticationToken, inputDirectory + File.separator + file);
-						if(descriptionResult.isSucceeded()) {
-							String description = descriptionResult.getData();
-							if(!bracketValidator.validate(description)) {
-								PreprocessedDescription preprocessedDescription = new PreprocessedDescription(
-										inputDirectory + File.separator + file,
-										file, 0,
-										bracketValidator.getBracketCountDifferences(description));
-								result.add(preprocessedDescription);
-							}	
-						}
-					}
-				}
-			}
+			List<PreprocessedDescription> result = this.getPreprocessedDescriptions(authenticationToken, task);
+			if(result == null)
+				return new RPCResult<List<PreprocessedDescription>>(false, "Not a compatible task");
 			return new RPCResult<List<PreprocessedDescription>>(true, result);
 		} catch(Exception e) {
 			e.printStackTrace();

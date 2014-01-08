@@ -7,10 +7,13 @@
 	</ui:style>
 	<g:VerticalPanel>
 	    <g:cell>
-	    <g:Label>File Manager</g:Label>
+	    	<g:Label>File Manager</g:Label>
 	    </g:cell>
 	    <g:cell>
 	        <my:IManagableFileTreeView ui:field="managableFileTreeView"></my:IManagableFileTreeView>
 	    </g:cell>
+	    <g:cell>
+	    	<g:Anchor ui:field="annotationReviewAnchor">Annotation Review</g:Anchor>
+    	</g:cell>
 	</g:VerticalPanel>
 </ui:UiBinder>

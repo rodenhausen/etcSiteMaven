@@ -20,6 +20,7 @@ import edu.arizona.biosemantics.etcsite.client.common.MessagePresenter;
 import edu.arizona.biosemantics.etcsite.shared.file.FileTypeEnum;
 import edu.arizona.biosemantics.etcsite.shared.rpc.IFileService;
 import edu.arizona.biosemantics.etcsite.shared.rpc.IFileServiceAsync;
+import edu.arizona.biosemantics.etcsite.shared.rpc.RPCCallback;
 import edu.arizona.biosemantics.etcsite.shared.rpc.RPCResult;
 
 public class FileDragDropHandler implements DragStartHandler, DropHandler, DragOverHandler {
@@ -57,15 +58,9 @@ public class FileDragDropHandler implements DragStartHandler, DropHandler, DragO
 			String targetPath = fileImageLabel.getFileInfo().getFilePath();
 			
 			if(!targetPath.contains(sourcePath)) {
-				fileService.isDirectory(Authentication.getInstance().getToken(), 
-						sourcePath, new AsyncCallback<RPCResult<Boolean>>() {
-					@Override
-					public void onFailure(Throwable caught) {
-						caught.printStackTrace();
-					}
-					@Override
-					public void onSuccess(RPCResult<Boolean> isDirectory) {
-						if(isDirectory.isSucceeded()) {
+				fileService.isDirectory(Authentication.getInstance().getToken(), sourcePath, new RPCCallback<Boolean>() {
+						@Override
+						public void onResult(Boolean isDirectory) {
 							//String targetAndAddonPath = fileImageLabel.getFileInfo().getFilePath() + File.seperator + sourceName;
 							String targetPath = fileImageLabel.getFileInfo().getFilePath();
 							if(!fileImageLabel.getFileInfo().getFileType().equals(FileTypeEnum.DIRECTORY))
@@ -74,7 +69,7 @@ public class FileDragDropHandler implements DragStartHandler, DropHandler, DragO
 							final int targetLevel = getLevel(fileImageLabel.getFileTreeItem());
 							final String targetPathFinal = targetPath;
 							
-							if(isDirectory.getData()) {
+							if(isDirectory) {
 								fileService.getDepth(Authentication.getInstance().getToken(), sourcePath, 
 										new AsyncCallback<RPCResult<Integer>>() {
 									
@@ -95,11 +90,9 @@ public class FileDragDropHandler implements DragStartHandler, DropHandler, DragO
 										}
 									}
 								});
-							} else {
+							} else 
 								moveFile(sourcePath, targetPathFinal);
-							}
 						}
-					}
 				});
 			} else {
 				messagePresenter.showMessage("File Manager", "Directory cannot be moved into its descendants.");

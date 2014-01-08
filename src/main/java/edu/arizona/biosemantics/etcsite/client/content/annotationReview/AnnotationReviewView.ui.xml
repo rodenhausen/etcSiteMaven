@@ -3,14 +3,10 @@
     xmlns:g="urn:import:com.google.gwt.user.client.ui"
     xmlns:my="urn:import:edu.arizona.biosemantics.etcsite.client.content.annotationReview">
     <ui:style>     
-		.verticalPanel {
-			width: 900px;
-		}   
         .westPanel {
 			padding: 20px;
         }
 		.northPanel {
-			width:900px;
 			margin-left: auto;
 			margin-right: auto;
 		}
@@ -20,15 +16,14 @@
         }
     </ui:style>
     <g:HTMLPanel >
-    <div class='content900pxCentered'>
-    <g:VerticalPanel styleName='{style.verticalPanel}'>
+    <g:VerticalPanel>
         <g:cell>
          <g:Label styleName="siteHeading">
              Markup Review
          </g:Label>   
         </g:cell>
     	<g:cell>
-    	 <g:DockLayoutPanel unit='PX' height='1000'>
+    	 <g:DockLayoutPanel height="1000px" width="950px" ui:field="dockLayoutPanel">
 	       <g:north size='194' styleName="{style.northPanel}">
 	       	   <my:ISearchView ui:field="search"></my:ISearchView>
 	       </g:north>
@@ -41,6 +36,5 @@
 	     </g:DockLayoutPanel>
     	</g:cell>
      </g:VerticalPanel>
-     </div>
      </g:HTMLPanel>
 </ui:UiBinder> 

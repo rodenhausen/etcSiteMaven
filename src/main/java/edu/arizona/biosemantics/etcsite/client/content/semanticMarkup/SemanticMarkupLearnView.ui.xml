@@ -25,14 +25,14 @@
 				<g:InlineLabel>x sentences</g:InlineLabel>
 				<g:InlineLabel>in this collection of descriptions.</g:InlineLabel>
 			</g:FlowPanel>
-			<g:HorizontalPanel ui:field="resumablePanel">
-				<g:Image styleName="{style.playImage}" ui:field="playImage" url='images/play.png'></g:Image>
+			<g:HorizontalPanel ui:field="resumablePanel" visible="false">
+				<g:Image styleName="{style.playImage}" ui:field="playImage" url="images/play.png"></g:Image>
 				<g:FlowPanel>
 					<g:InlineLabel>We are done learning the terminology.</g:InlineLabel>
 				</g:FlowPanel>
 			</g:HorizontalPanel>
 			<g:HorizontalPanel ui:field="nonResumablePanel">
-				<g:Image styleName="{style.waitImage}" ui:field="waitImage" url='images/loader3.gif'/>	
+				<g:Image styleName="{style.waitImage}" ui:field="waitImage" url="images/loader3.gif"/>	
 				<g:FlowPanel>
 				    <g:InlineLabel>We are now learning the terminology. 
 				    You will receive an email when processing has completed. You can come back to this task using the </g:InlineLabel>

@@ -188,21 +188,16 @@ public class ManagableFileTreePresenter implements IManagableFileTreeView.Presen
 		if(selection != null) { 
 			final String selectionPath = selection.getFileInfo().getFilePath();
 			if(selectionPath != null) {
-				fileService.getDownloadPath(Authentication.getInstance().getToken(), selectionPath, new AsyncCallback<RPCResult<String>>() {
+				fileService.getDownloadPath(Authentication.getInstance().getToken(), selectionPath, new RPCCallback<String>() {
 					@Override
-					public void onFailure(Throwable caught) {
+					public void onResult(String result) {
+						//target=" + result.getData() + "&directory=yes
+						Window.Location.replace(URL.encode("/etcsite/download/?target=" + result + "&username=" + Authentication.getInstance().getUsername() + "&" + 
+								"sessionID=" + Authentication.getInstance().getSessionID()));
 						
-					}
-					@Override
-					public void onSuccess(RPCResult<String> result) {
-						if(result.isSucceeded())
-							//target=" + result.getData() + "&directory=yes
-							Window.Location.replace(URL.encode("/etcsite/download/?target=" + result.getData() + "&username=" + Authentication.getInstance().getUsername() + "&" + 
-									"sessionID=" + Authentication.getInstance().getSessionID()));
-							
-							/*Window.open("/etcsite/download/?target=" + result.getData() + "&username=" + Authentication.getInstance().getUsername() + "&" + 
-									"sessionID=" + Authentication.getInstance().getSessionID()
-									, "download", "resizable=yes,scrollbars=yes,menubar=yes,location=yes,status=yes"); */
+						/*Window.open("/etcsite/download/?target=" + result.getData() + "&username=" + Authentication.getInstance().getUsername() + "&" + 
+								"sessionID=" + Authentication.getInstance().getSessionID()
+								, "download", "resizable=yes,scrollbars=yes,menubar=yes,location=yes,status=yes"); */
 					}
 				});
 			} else {

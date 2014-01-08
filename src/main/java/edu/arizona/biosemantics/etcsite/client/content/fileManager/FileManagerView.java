@@ -1,8 +1,11 @@
 package edu.arizona.biosemantics.etcsite.client.content.fileManager;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -21,6 +24,9 @@ public class FileManagerView extends Composite implements IFileManagerView {
 	@UiField(provided = true)
 	IManagableFileTreeView managableFileTreeView;
 	
+	@UiField
+	Anchor annotationReviewAnchor;
+	
 	@Inject
 	public FileManagerView(IManagableFileTreeView managableFileTreeView) {
 		this.managableFileTreeView = managableFileTreeView;
@@ -30,6 +36,11 @@ public class FileManagerView extends Composite implements IFileManagerView {
 	@Override
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
+	}
+	
+	@UiHandler("annotationReviewAnchor")
+	public void onAnnotationReview(ClickEvent event) {
+		presenter.onAnnotationReview();
 	}
 
 }

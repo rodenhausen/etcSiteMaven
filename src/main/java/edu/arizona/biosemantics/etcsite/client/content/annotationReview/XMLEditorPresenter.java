@@ -11,6 +11,7 @@ import edu.arizona.biosemantics.etcsite.shared.rpc.AuthenticationToken;
 import edu.arizona.biosemantics.etcsite.shared.rpc.IFileAccessServiceAsync;
 import edu.arizona.biosemantics.etcsite.shared.rpc.IFileFormatServiceAsync;
 import edu.arizona.biosemantics.etcsite.shared.rpc.IFileSearchServiceAsync;
+import edu.arizona.biosemantics.etcsite.shared.rpc.RPCCallback;
 import edu.arizona.biosemantics.etcsite.shared.rpc.RPCResult;
 
 public class XMLEditorPresenter implements IXMLEditorView.Presenter {
@@ -43,28 +44,18 @@ public class XMLEditorPresenter implements IXMLEditorView.Presenter {
 	
 	@Override
 	public void onSaveButtonClicked() {
-		fileFormatService.isValidMarkedupTaxonDescriptionContent(new AuthenticationToken("test", ""), view.getText(), new AsyncCallback<RPCResult<Boolean>>() {
+		fileFormatService.isValidMarkedupTaxonDescriptionContent(new AuthenticationToken("test", ""), view.getText(), new RPCCallback<Boolean>() {
 			@Override
-			public void onFailure(Throwable caught) {
-				caught.printStackTrace();
-			}
-			@Override
-			public void onSuccess(RPCResult<Boolean> result) {
-				if(result.isSucceeded()) {
-					if(result.getData()) {
-						fileAccessService.setFileContent(new AuthenticationToken("test", ""), target, view.getText(), new AsyncCallback<RPCResult<Void>>() {
-							@Override
-							public void onFailure(Throwable caught) {
-								caught.printStackTrace();
-							}
-							@Override
-							public void onSuccess(RPCResult<Void> result) {
-								Window.alert("Saved successfully");
-							}
-						});
-					} else {
-						Window.alert("Invalid format. Can't save.");
-					}
+			public void onResult(Boolean result) {
+				if(result) {
+					fileAccessService.setFileContent(new AuthenticationToken("test", ""), target, view.getText(), new RPCCallback<Void>() {
+						@Override
+						public void onResult(Void result) {
+							Window.alert("Saved successfully");
+						}
+					});
+				} else {
+					Window.alert("Invalid format. Can't save.");
 				}
 			}
 		});

@@ -6,6 +6,10 @@ public interface IFileManagerView extends IsWidget {
 
 	public interface Presenter {
 
+		void onAnnotationReview();
+
+		IsWidget getView();
+
 	}
 
 	void setPresenter(Presenter presenter);
