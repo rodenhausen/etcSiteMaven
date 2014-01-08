@@ -50,12 +50,11 @@ public class SemanticMarkupReviewPresenter implements ISemanticMarkupReviewView.
 
 	@Override
 	public void onNext() {
-		semanticMarkupService.goToTaskStage(Authentication.getInstance().getToken(), task, 
-				TaskStageEnum.PARSE_TEXT, new RPCCallback<Task>() {
-					@Override
-					public void onResult(Task result) {
-						placeController.goTo(new SemanticMarkupParsePlace(task));
-					}
+		semanticMarkupService.goToTaskStage(Authentication.getInstance().getToken(), task, TaskStageEnum.PARSE_TEXT, new RPCCallback<Task>() {
+			@Override
+			public void onResult(Task result) {
+				placeController.goTo(new SemanticMarkupParsePlace(task));
+			}
 		});
 	}
 

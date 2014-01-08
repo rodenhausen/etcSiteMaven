@@ -18,7 +18,6 @@ import edu.arizona.biosemantics.etcsite.shared.rpc.semanticMarkup.TaskStageEnum;
 
 public class SemanticMarkupPreprocessPresenter implements ISemanticMarkupPreprocessView.Presenter {
 
-	
 	private Task task;
 	private ISemanticMarkupPreprocessView view;
 	private ISemanticMarkupServiceAsync semanticMarkupService;
@@ -46,8 +45,32 @@ public class SemanticMarkupPreprocessPresenter implements ISemanticMarkupPreproc
 	}
 
 	@Override
-	public void setTask(Task task) {
+	public void setTask(final Task task) {
 		this.task = task;
+		semanticMarkupService.preprocess(Authentication.getInstance().getToken(), task, new RPCCallback<List<PreprocessedDescription>>() {
+			@Override
+			public void onResult(List<PreprocessedDescription> result) {
+                if(result.isEmpty()) {
+                    semanticMarkupService.goToTaskStage(Authentication.getInstance().getToken(), task, TaskStageEnum.LEARN_TERMS, new RPCCallback<Task>() {
+						@Override
+						public void onResult(Task result) {
+							placeController.goTo(new SemanticMarkupLearnPlace(task));
+						}
+                    });
+                    return;
+                } else 
+                	preprocessedDescriptions = result;
+                	
+                view.setHTML("");
+                view.setBracketCounts("");
+                view.setDescriptionIDLabel("");
+                setEnabledDescriptionsNavigation(true);
+                if(preprocessedDescriptions.size() == 1)
+                	setEnabledDescriptionsNavigation(false);
+                currentPreprocessedDescription = 0;
+                setPreprocessedDescription(preprocessedDescriptions.get(currentPreprocessedDescription));
+			}
+		});
 	}
 
 	@Override
@@ -58,7 +81,7 @@ public class SemanticMarkupPreprocessPresenter implements ISemanticMarkupPreproc
 	@Override
 	public void onNext() {
 		if(preprocessedDescriptions.size() == 0 || (preprocessedDescriptions.size() == 1 && 
-				bracketValidator.validate(view.getText())))
+				bracketValidator.validate(view.getHTML())))
 			storeAndLeave();
 		else {
 			messagePresenter.showMessage("Unmatched Brackets", "You have not corrected all the unmatched brackets.");
@@ -85,7 +108,7 @@ public class SemanticMarkupPreprocessPresenter implements ISemanticMarkupPreproc
 		store(new RPCCallback<Void>() {
 			@Override
 			public void onResult(Void result) {
-				String text = view.getText();
+				String text = view.getHTML();
 				if(bracketValidator.validate(text)) {
 					preprocessedDescriptions.remove(currentPreprocessedDescription);
 					currentPreprocessedDescription--;
@@ -105,7 +128,7 @@ public class SemanticMarkupPreprocessPresenter implements ISemanticMarkupPreproc
 		store(new RPCCallback<Void>() {
 			@Override
 			public void onResult(Void result) {
-				String text = view.getText();
+				String text = view.getHTML();
 				if(bracketValidator.validate(text)) {
 					preprocessedDescriptions.remove(currentPreprocessedDescription);
 					if(preprocessedDescriptions.size() == 1)
@@ -121,7 +144,7 @@ public class SemanticMarkupPreprocessPresenter implements ISemanticMarkupPreproc
 
 	@Override
 	public void onValueChange() {
-		String text = view.getText();
+		String text = view.getHTML();
     	updateBracketCounts(bracketValidator.getBracketCountDifferences(text));
 	}
 	
@@ -179,7 +202,7 @@ public class SemanticMarkupPreprocessPresenter implements ISemanticMarkupPreproc
 		/*System.out.println(display.getTextArea().getFormatter().getForeColor());
 		System.out.println(display.getTextArea().getFormatter().isBold());
 		*/
-		view.setText(text);
+		view.setHTML(text);
 		
 		/*
 		System.out.println(display.getTextArea().getFormatter().getForeColor());
@@ -202,7 +225,7 @@ public class SemanticMarkupPreprocessPresenter implements ISemanticMarkupPreproc
 	
 	protected void store(RPCCallback<Void> callback) {
 		String target = preprocessedDescriptions.get(currentPreprocessedDescription).getFilePath();
-		String content = view.getText();
+		String content = view.getHTML();
 		semanticMarkupService.setDescription(Authentication.getInstance().getToken(), 
 				target, content, callback);
 	}

@@ -63,18 +63,18 @@ public class SemanticMarkupPreprocessView extends Composite implements ISemantic
 	}
 	
 	
-	@UiHandler("nextButton")
+	@UiHandler("nextDescriptionButton")
 	public void onNextDescription(ClickEvent event) {
 		presenter.onNextDescription();
 	}
 	
-	@UiHandler("nextButton")
+	@UiHandler("previousDescriptionButton")
 	public void onPreviousDescription(ClickEvent event) {
 		presenter.onPreviousDescription();
 	}
 
 	@Override
-	public String getText() {
+	public String getHTML() {
 		return textArea.getText();
 	}
 
@@ -89,8 +89,8 @@ public class SemanticMarkupPreprocessView extends Composite implements ISemantic
 	}
 
 	@Override
-	public void setText(String text) {
-		this.textArea.setText(text);
+	public void setHTML(String text) {
+		this.textArea.setHTML(text);
 	}
 
 	@Override

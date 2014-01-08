@@ -24,13 +24,13 @@ public interface ISemanticMarkupPreprocessView extends IsWidget {
 	
 	void setPresenter(Presenter presenter);
 
-	String getText();
+	String getHTML();
 
 	void setBracketCounts(String bracketHTML);
 
 	void setDescriptionIDLabel(String text);
 
-	void setText(String text);
+	void setHTML(String text);
 
 	void setEnabledNextDescriptionButton(boolean value);
 	

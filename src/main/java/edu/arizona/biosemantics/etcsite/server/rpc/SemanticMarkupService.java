@@ -248,10 +248,7 @@ public class SemanticMarkupService extends RemoteServiceServlet implements ISema
 			TaskStage taskStage = TaskStageDAO.getInstance().getSemanticMarkupTaskStage(TaskStageEnum.REVIEW_TERMS.toString());
 			task.setTaskStage(taskStage);
 			TaskDAO.getInstance().updateTask(task);
-			SemanticMarkupConfiguration configuration = 
-					SemanticMarkupConfigurationDAO.getInstance().getSemanticMarkupConfiguration(
-							task.getConfiguration().getConfiguration().getId());
-			
+			task = TaskDAO.getInstance().getTask(task.getId());
 			return new RPCResult<Task>(true, task);
 		} catch(Exception e) {
 			e.printStackTrace();
