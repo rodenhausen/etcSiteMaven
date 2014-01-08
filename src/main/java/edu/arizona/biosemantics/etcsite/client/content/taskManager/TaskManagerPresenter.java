@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.google.web.bindery.event.shared.EventBus;
@@ -52,21 +53,6 @@ public class TaskManagerPresenter implements ITaskManagerView.Presenter {
 		this.matrixGenerationService = matrixGenerationService;
 		this.resumeTaskPlaceMapper = resumeTaskPlaceMapper;
 		
-		taskService.getAllTasks(Authentication.getInstance().getToken(), new RPCCallback<List<Task>>() {
-			@Override
-			public void onResult(final List<Task> taskResult) {
-				taskService.getInviteesForOwnedTasks(Authentication.getInstance().getToken(), new RPCCallback<Map<Task, Set<ShortUser>>>() {
-					@Override
-					public void onResult(Map<Task, Set<ShortUser>> result) {
-						inviteesForOwnedTasks = result;
-						List<TaskData> taskData = new LinkedList<TaskData>();
-						for(Task task : taskResult)
-							taskData.add(new TaskData(task, result.get(task)));
-						view.setTaskData(taskData);
-					}
-				});
-			}
-		});
 		eventBus.addHandler(ResumableTasksEvent.TYPE, new ResumableTasksEventHandler() {
 			@Override
 			public void onResumableTaskEvent(ResumableTasksEvent resumableTasksEvent) {
@@ -164,5 +150,30 @@ public class TaskManagerPresenter implements ITaskManagerView.Presenter {
 	@Override
 	public void onResume(TaskData taskData) {
 		placeController.goTo(resumeTaskPlaceMapper.getPlace(taskData.getTask()));
+	}
+
+	@Override
+	public IsWidget getView() {
+		return view;
+	}
+
+	@Override
+	public void refresh() {
+		view.resetSelection();
+		taskService.getAllTasks(Authentication.getInstance().getToken(), new RPCCallback<List<Task>>() {
+			@Override
+			public void onResult(final List<Task> taskResult) {
+				taskService.getInviteesForOwnedTasks(Authentication.getInstance().getToken(), new RPCCallback<Map<Task, Set<ShortUser>>>() {
+					@Override
+					public void onResult(Map<Task, Set<ShortUser>> result) {
+						inviteesForOwnedTasks = result;
+						List<TaskData> taskData = new LinkedList<TaskData>();
+						for(Task task : taskResult)
+							taskData.add(new TaskData(task, result.get(task)));
+						view.setTaskData(taskData);
+					}
+				});
+			}
+		});
 	}
 }

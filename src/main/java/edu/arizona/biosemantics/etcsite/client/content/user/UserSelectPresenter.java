@@ -17,11 +17,9 @@ public class UserSelectPresenter implements UserSelectView.Presenter {
 	public UserSelectPresenter(IUserSelectView view) {
 		this.view = view;
 		view.setPresenter(this);
-		this.dialogBox = new TitleCloseDialogBox("File Content");
+		this.dialogBox = new TitleCloseDialogBox("User Selection");
 		this.dialogBox.setGlassEnabled(true);
 		this.dialogBox.setWidget(view);
-		this.dialogBox.setTitle("User Selection");
-		this.dialogBox.center();
 	}
 	
 	@Override

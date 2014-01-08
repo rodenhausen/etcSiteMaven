@@ -1,53 +1,26 @@
 package edu.arizona.biosemantics.etcsite.client.content.taskManager;
 
-import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.activity.shared.MyAbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
 
-public class TaskManagerActivity extends MyAbstractActivity implements ITaskManagerView.Presenter {
+public class TaskManagerActivity extends MyAbstractActivity { 
 
-	private ITaskManagerView taskManagerView;
+	private ITaskManagerView.Presenter taskManagerPresenter;
 	private PlaceController placeController;
 
 	@Inject
-	public TaskManagerActivity(ITaskManagerView taskManagerView, PlaceController placeController) {
+	public TaskManagerActivity(ITaskManagerView.Presenter taskManagerPresenter, PlaceController placeController) {
 		this.placeController = placeController;
-		this.taskManagerView = taskManagerView;
+		this.taskManagerPresenter = taskManagerPresenter;
 	}
-	
 	
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
-		taskManagerView.setPresenter(this);
-		panel.setWidget(taskManagerView.asWidget());
-		//TODO: taskManagerView.setTaskData();
-	}
-
-	@Override
-	public void onShare(TaskData taskData) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onDelete(TaskData taskData) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onRewind(TaskData taskData) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onResume(TaskData taskData) {
-		// TODO Auto-generated method stub
-		
+		taskManagerPresenter.refresh();
+		panel.setWidget(taskManagerPresenter.getView());
 	}
 
 

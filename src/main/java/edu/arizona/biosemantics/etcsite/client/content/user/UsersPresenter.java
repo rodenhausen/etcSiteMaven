@@ -9,7 +9,7 @@ import edu.arizona.biosemantics.etcsite.shared.db.ShortUser;
 import edu.arizona.biosemantics.etcsite.shared.rpc.IUserServiceAsync;
 import edu.arizona.biosemantics.etcsite.shared.rpc.RPCCallback;
 
-public class UsersPresenter implements UsersView.Presenter {
+public class UsersPresenter implements IUsersView.Presenter {
 
 	private IUsersView view;
 	private IUserServiceAsync userService;

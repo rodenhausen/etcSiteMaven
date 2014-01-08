@@ -90,7 +90,14 @@ import edu.arizona.biosemantics.etcsite.client.content.semanticMarkup.SemanticMa
 import edu.arizona.biosemantics.etcsite.client.content.settings.ISettingsView;
 import edu.arizona.biosemantics.etcsite.client.content.settings.SettingsView;
 import edu.arizona.biosemantics.etcsite.client.content.taskManager.ITaskManagerView;
+import edu.arizona.biosemantics.etcsite.client.content.taskManager.TaskManagerPresenter;
 import edu.arizona.biosemantics.etcsite.client.content.taskManager.TaskManagerView;
+import edu.arizona.biosemantics.etcsite.client.content.user.IUserSelectView;
+import edu.arizona.biosemantics.etcsite.client.content.user.IUsersView;
+import edu.arizona.biosemantics.etcsite.client.content.user.UserSelectPresenter;
+import edu.arizona.biosemantics.etcsite.client.content.user.UserSelectView;
+import edu.arizona.biosemantics.etcsite.client.content.user.UsersPresenter;
+import edu.arizona.biosemantics.etcsite.client.content.user.UsersView;
 import edu.arizona.biosemantics.etcsite.client.layout.ContentActivityManagerProvider;
 import edu.arizona.biosemantics.etcsite.client.layout.ContentActivityMapper;
 import edu.arizona.biosemantics.etcsite.client.layout.EtcSitePresenter;
@@ -142,7 +149,13 @@ public class ClientModule extends AbstractGinModule {
 		bind(IHelpView.class).to(HelpView.class).in(Singleton.class);
 		bind(ISettingsView.class).to(SettingsView.class).in(Singleton.class);
 		bind(ITaskManagerView.class).to(TaskManagerView.class).in(Singleton.class);
+		bind(ITaskManagerView.Presenter.class).to(TaskManagerPresenter.class).in(Singleton.class);
 		bind(IFileManagerView.class).to(FileManagerView.class).in(Singleton.class);
+		
+		bind(IUsersView.class).to(UsersView.class).in(Singleton.class);
+		bind(IUsersView.Presenter.class).to(UsersPresenter.class).in(Singleton.class);
+		bind(IUserSelectView.class).to(UserSelectView.class).in(Singleton.class);
+		bind(IUserSelectView.Presenter.class).to(UserSelectPresenter.class).in(Singleton.class);
 		
 		//FileTreeView may not be singleton as it is a child for e.g. SelectableFileTreeView and
 		//MangabableFileTreeView. As a widget can only have one parent at a time it can't be a singleton,
