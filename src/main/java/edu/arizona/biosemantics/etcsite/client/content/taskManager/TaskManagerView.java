@@ -330,6 +330,9 @@ public class TaskManagerView extends Composite implements ITaskManagerView, Hand
 			Collections.replaceAll(tasks, foundTask, taskData);
 			selectionModel.setSelected(taskData, select);
 		}
+		if(taskData.equals(this.selectionModel.getSelectedObject())) {
+			this.onSelectionChange(null);
+		}
 	}
 
 	@Override

@@ -39,6 +39,7 @@ public class SemanticMarkupLearnView extends Composite implements ISemanticMarku
 		this.presenter = presenter;
 	}
 
+	@UiHandler("taskManagerAnchor")
 	public void onTaskManager(ClickEvent event) {
 		presenter.onTaskManager();
 	}

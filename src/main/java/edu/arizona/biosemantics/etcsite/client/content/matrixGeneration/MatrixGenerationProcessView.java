@@ -37,6 +37,7 @@ public class MatrixGenerationProcessView extends Composite implements IMatrixGen
 		this.presenter = presenter;
 	}
 
+	@UiHandler("taskManagerAnchor")
 	public void onTaskManager(ClickEvent event) {
 		presenter.onTaskManager();
 	}

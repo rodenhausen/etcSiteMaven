@@ -20,6 +20,7 @@ import edu.arizona.biosemantics.etcsite.shared.file.FileFilter;
 import edu.arizona.biosemantics.etcsite.shared.file.FilePathShortener;
 import edu.arizona.biosemantics.etcsite.shared.rpc.ISemanticMarkupServiceAsync;
 import edu.arizona.biosemantics.etcsite.shared.rpc.RPCCallback;
+import edu.arizona.biosemantics.etcsite.shared.rpc.semanticMarkup.TaskStageEnum;
 
 public class SemanticMarkupInputPresenter implements ISemanticMarkupInputView.Presenter {
 
@@ -70,7 +71,14 @@ public class SemanticMarkupInputPresenter implements ISemanticMarkupInputView.Pr
 				view.getTaskName(), inputFile, view.getGlossaryName(), new RPCCallback<Task>() {
 					@Override
 					public void onResult(Task result) {
-						placeController.goTo(new SemanticMarkupPreprocessPlace(result));
+						switch(TaskStageEnum.valueOf(result.getTaskStage().getTaskStage())) {
+						case LEARN_TERMS:
+							placeController.goTo(new SemanticMarkupLearnPlace(result));
+							break;
+						default:
+							placeController.goTo(new SemanticMarkupPreprocessPlace(result));
+							break;
+						}
 					}
 		});
 	}

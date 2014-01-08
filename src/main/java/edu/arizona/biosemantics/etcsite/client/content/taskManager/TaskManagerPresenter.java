@@ -56,8 +56,9 @@ public class TaskManagerPresenter implements ITaskManagerView.Presenter {
 		eventBus.addHandler(ResumableTasksEvent.TYPE, new ResumableTasksEventHandler() {
 			@Override
 			public void onResumableTaskEvent(ResumableTasksEvent resumableTasksEvent) {
-				for(Task task : resumableTasksEvent.getTasks().values())
+				for(Task task : resumableTasksEvent.getTasks().values()) {
 					view.updateTaskData(new TaskData(task, inviteesForOwnedTasks.get(task)));
+				}
 			}
 		});
 	}
