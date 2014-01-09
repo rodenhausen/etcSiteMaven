@@ -60,9 +60,9 @@ public class UsersView extends Composite implements IUsersView {
 
 	@Override
 	public void setUsers(List<ShortUser> users) {
-		List<ShortUser> tasksList = dataProvider.getList();
-		tasksList.clear();
-		tasksList.addAll(users);
+		List<ShortUser> usersList = dataProvider.getList();
+		usersList.clear();
+		usersList.addAll(users);
 	}
 
 	@Override
@@ -72,6 +72,7 @@ public class UsersView extends Composite implements IUsersView {
 
 	@Override
 	public void setSelectedUsers(Set<ShortUser> selectedUsers) {
+		selectionModel.clear();
 		for(ShortUser shortUser : selectedUsers) {
 			selectionModel.setSelected(shortUser, true);
 		}

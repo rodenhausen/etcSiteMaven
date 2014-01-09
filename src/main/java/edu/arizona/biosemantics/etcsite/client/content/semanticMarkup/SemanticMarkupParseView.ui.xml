@@ -18,8 +18,8 @@
 	<g:VerticalPanel>
 		<my:SubMenu ui:field="subMenu" step="PARSE_TEXT"/>
 		<g:VerticalPanel>
-			<g:HorizontalPanel ui:field="resumablePanel">
-				<g:Image styleName="{style.playImage}" ui:field="playImage" url="images/play.png" visible="false"></g:Image>
+			<g:HorizontalPanel ui:field="resumablePanel" visible="false">
+				<g:Image styleName="{style.playImage}" ui:field="playImage" url="images/play.png"></g:Image>
 				<g:FlowPanel>
 					<g:InlineLabel>We are done parsing the descriptions.</g:InlineLabel>
 				</g:FlowPanel>

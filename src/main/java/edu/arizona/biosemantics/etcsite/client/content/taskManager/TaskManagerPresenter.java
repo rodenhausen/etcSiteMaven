@@ -15,8 +15,11 @@ import com.google.web.bindery.event.shared.EventBus;
 import edu.arizona.biosemantics.etcsite.client.common.Authentication;
 import edu.arizona.biosemantics.etcsite.client.common.MessageConfirmPresenter;
 import edu.arizona.biosemantics.etcsite.client.common.MessageConfirmPresenter.AbstractConfirmListener;
+import edu.arizona.biosemantics.etcsite.client.content.user.IUserSelectView;
+import edu.arizona.biosemantics.etcsite.client.content.user.IUsersView;
 import edu.arizona.biosemantics.etcsite.client.content.user.UserSelectPresenter;
 import edu.arizona.biosemantics.etcsite.client.content.user.UserSelectPresenter.ISelectListener;
+import edu.arizona.biosemantics.etcsite.client.content.user.UsersPresenter;
 import edu.arizona.biosemantics.etcsite.shared.db.Share;
 import edu.arizona.biosemantics.etcsite.shared.db.ShortUser;
 import edu.arizona.biosemantics.etcsite.shared.db.Task;
@@ -27,7 +30,8 @@ import edu.arizona.biosemantics.etcsite.shared.rpc.RPCCallback;
 
 public class TaskManagerPresenter implements ITaskManagerView.Presenter {
 
-	private UserSelectPresenter userSelectPresenter;
+	private IUserSelectView.Presenter userSelectPresenter;
+	private IUsersView.Presenter usersPresenter;
 	private Map<Task, Set<ShortUser>> inviteesForOwnedTasks = new HashMap<Task, Set<ShortUser>>();
 	private MessageConfirmPresenter messagePresenter;
 	private ITaskServiceAsync taskService;
@@ -40,13 +44,16 @@ public class TaskManagerPresenter implements ITaskManagerView.Presenter {
 	
 	@Inject 
 	public TaskManagerPresenter(final ITaskManagerView view, PlaceController placeController, @Named("Tasks")EventBus eventBus,
-			UserSelectPresenter userSelectPresenter, MessageConfirmPresenter messagePresenter, final ITaskServiceAsync taskService, ISemanticMarkupServiceAsync semanticMarkupService,
-			IMatrixGenerationServiceAsync matrixGenerationService, ResumeTaskPlaceMapper resumeTaskPlaceMapper) {
+			MessageConfirmPresenter messagePresenter, final ITaskServiceAsync taskService, 
+			ISemanticMarkupServiceAsync semanticMarkupService,
+			IMatrixGenerationServiceAsync matrixGenerationService, ResumeTaskPlaceMapper resumeTaskPlaceMapper, 
+			IUserSelectView.Presenter usersSelectPresenter, IUsersView.Presenter usersPresenter) {
 		this.view = view;
 		this.view.setPresenter(this);
 		this.placeController = placeController;
 		this.eventBus = eventBus;
 		this.userSelectPresenter = userSelectPresenter;
+		this.usersPresenter = usersPresenter;
 		this.messagePresenter = messagePresenter;
 		this.taskService = taskService;
 		this.semanticMarkupService = semanticMarkupService;
@@ -71,7 +78,8 @@ public class TaskManagerPresenter implements ITaskManagerView.Presenter {
 		taskService.getInvitees(Authentication.getInstance().getToken(), task, new RPCCallback<Set<ShortUser>>() {			
 			@Override
 			public void onResult(Set<ShortUser> result) {
-				userSelectPresenter.setSelected(result);
+				usersPresenter.refresh();
+				//usersPresenter.setSelected(result);
 				userSelectPresenter.show(new ISelectListener() {
 					@Override
 					public void onSelect(Set<ShortUser> users) {
@@ -137,6 +145,7 @@ public class TaskManagerPresenter implements ITaskManagerView.Presenter {
 					placeController.goTo(new edu.arizona.biosemantics.etcsite.client.content.semanticMarkup.SemanticMarkupReviewPlace(taskData.getTask()));
 				}
 			});
+			break;
 		case MATRIX_GENERATION:
 			matrixGenerationService.goToTaskStage(Authentication.getInstance().getToken(), taskData.getTask(), 
 					edu.arizona.biosemantics.etcsite.shared.rpc.matrixGeneration.TaskStageEnum.REVIEW, new RPCCallback<Task>() {
@@ -145,6 +154,7 @@ public class TaskManagerPresenter implements ITaskManagerView.Presenter {
 					placeController.goTo(new edu.arizona.biosemantics.etcsite.client.content.matrixGeneration.MatrixGenerationReviewPlace(taskData.getTask()));
 				}
 			});
+			break;
 		}
 	}
 

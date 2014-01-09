@@ -19,9 +19,9 @@
 		<my:SubMenu ui:field="subMenu" step="LEARN_TERMS"/>
 		<g:VerticalPanel>
 			<g:FlowPanel>
-				<g:InlineLabel>There are</g:InlineLabel>
+				<g:InlineLabel>There are&nbsp;</g:InlineLabel>
 				<g:InlineLabel>x words</g:InlineLabel>
-				<g:InlineLabel> and </g:InlineLabel>
+				<g:InlineLabel>&nbsp;and&nbsp;</g:InlineLabel>
 				<g:InlineLabel>x sentences</g:InlineLabel>
 				<g:InlineLabel>in this collection of descriptions.</g:InlineLabel>
 			</g:FlowPanel>

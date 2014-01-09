@@ -2,6 +2,7 @@ package edu.arizona.biosemantics.etcsite.client.content.user;
 
 import java.util.Set;
 
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TitleCloseDialogBox;
 import com.google.inject.Inject;
 
@@ -38,8 +39,4 @@ public class UserSelectPresenter implements UserSelectView.Presenter {
 		void onSelect(Set<ShortUser> user);
 	}
 
-	public void setSelected(Set<ShortUser> result) {
-		// TODO Auto-generated method stub
-		
-	}
 }

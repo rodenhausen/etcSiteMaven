@@ -18,7 +18,7 @@
 	<g:VerticalPanel>
 		<my:SubMenu ui:field="subMenu" step="PROCESS"/>
 		<g:VerticalPanel>
-			<g:HorizontalPanel ui:field="resumablePanel">
+			<g:HorizontalPanel ui:field="resumablePanel" visible="false">
 				<g:Image styleName="{style.playImage}" ui:field="playImage" url='images/play.png'></g:Image>
 				<g:FlowPanel>
 					<g:InlineLabel>We are done generating a matrix.</g:InlineLabel>

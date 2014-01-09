@@ -1,6 +1,7 @@
 package edu.arizona.biosemantics.etcsite.client.content.user;
 
 import java.util.List;
+import java.util.Set;
 
 import com.google.inject.Inject;
 
@@ -22,6 +23,7 @@ public class UsersPresenter implements IUsersView.Presenter {
 		this.refresh();
 	}
 	
+	@Override
 	public void refresh() {
 		userService.getUsers(Authentication.getInstance().getToken(), false, new RPCCallback<List<ShortUser>>() {
 			@Override
@@ -29,6 +31,11 @@ public class UsersPresenter implements IUsersView.Presenter {
 				view.setUsers(result);
 			}
 		});
+	}
+	
+	@Override
+	public void setSelected(Set<ShortUser> selectedUsers) {
+		view.setSelectedUsers(selectedUsers);
 	}
 
 }
