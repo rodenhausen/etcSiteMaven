@@ -142,7 +142,7 @@ public class TaskManagerPresenter implements ITaskManagerView.Presenter {
 					edu.arizona.biosemantics.etcsite.shared.rpc.semanticMarkup.TaskStageEnum.REVIEW_TERMS ,new RPCCallback<Task>() {
 				@Override
 				public void onResult(Task result) {
-					placeController.goTo(new edu.arizona.biosemantics.etcsite.client.content.semanticMarkup.SemanticMarkupReviewPlace(taskData.getTask()));
+					placeController.goTo(new edu.arizona.biosemantics.etcsite.client.content.semanticMarkup.SemanticMarkupReviewPlace(result));
 				}
 			});
 			break;
@@ -151,7 +151,7 @@ public class TaskManagerPresenter implements ITaskManagerView.Presenter {
 					edu.arizona.biosemantics.etcsite.shared.rpc.matrixGeneration.TaskStageEnum.REVIEW, new RPCCallback<Task>() {
 				@Override
 				public void onResult(Task result) {
-					placeController.goTo(new edu.arizona.biosemantics.etcsite.client.content.matrixGeneration.MatrixGenerationReviewPlace(taskData.getTask()));
+					placeController.goTo(new edu.arizona.biosemantics.etcsite.client.content.matrixGeneration.MatrixGenerationReviewPlace(result));
 				}
 			});
 			break;
