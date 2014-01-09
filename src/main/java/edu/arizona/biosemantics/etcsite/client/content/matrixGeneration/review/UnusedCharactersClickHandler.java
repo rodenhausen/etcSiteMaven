@@ -4,9 +4,9 @@ import com.google.gwt.dom.client.NativeEvent;
 
 public class UnusedCharactersClickHandler implements ClickHandler {
 
-	private ViewImpl viewImpl;
+	private ReviewView viewImpl;
 
-	public UnusedCharactersClickHandler(ViewImpl viewImpl) {
+	public UnusedCharactersClickHandler(ReviewView viewImpl) {
 		this.viewImpl = viewImpl;
 	}
 	

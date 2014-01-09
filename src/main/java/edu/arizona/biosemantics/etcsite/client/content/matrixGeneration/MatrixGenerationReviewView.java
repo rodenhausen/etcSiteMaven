@@ -9,7 +9,8 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
-import edu.arizona.biosemantics.etcsite.client.content.matrixGeneration.review.ViewImpl;
+import edu.arizona.biosemantics.etcsite.client.content.matrixGeneration.review.IReviewView;
+import edu.arizona.biosemantics.etcsite.client.content.matrixGeneration.review.ReviewView;
 
 public class MatrixGenerationReviewView extends Composite implements IMatrixGenerationReviewView {
 
@@ -21,10 +22,10 @@ public class MatrixGenerationReviewView extends Composite implements IMatrixGene
 	private Presenter presenter;
 
 	@UiField(provided = true)
-	ViewImpl view;
+	IReviewView view;
 	
 	@Inject
-	public MatrixGenerationReviewView(ViewImpl view) {
+	public MatrixGenerationReviewView(IReviewView view) {
 		super();
 		this.view = view;
 		initWidget(uiBinder.createAndBindUi(this));

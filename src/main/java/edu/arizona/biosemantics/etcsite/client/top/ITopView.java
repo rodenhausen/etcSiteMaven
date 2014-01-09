@@ -15,4 +15,6 @@ public interface ITopView extends IsWidget {
 
 	void setPresenter(Presenter presenter);
 
+	void setGreeting(String text);
+
 }

@@ -69,6 +69,9 @@ import edu.arizona.biosemantics.etcsite.client.content.matrixGeneration.MatrixGe
 import edu.arizona.biosemantics.etcsite.client.content.matrixGeneration.MatrixGenerationProcessView;
 import edu.arizona.biosemantics.etcsite.client.content.matrixGeneration.MatrixGenerationReviewPresenter;
 import edu.arizona.biosemantics.etcsite.client.content.matrixGeneration.MatrixGenerationReviewView;
+import edu.arizona.biosemantics.etcsite.client.content.matrixGeneration.review.IReviewView;
+import edu.arizona.biosemantics.etcsite.client.content.matrixGeneration.review.ReviewPresenter;
+import edu.arizona.biosemantics.etcsite.client.content.matrixGeneration.review.ReviewView;
 import edu.arizona.biosemantics.etcsite.client.content.semanticMarkup.ISemanticMarkupInputView;
 import edu.arizona.biosemantics.etcsite.client.content.semanticMarkup.ISemanticMarkupLearnView;
 import edu.arizona.biosemantics.etcsite.client.content.semanticMarkup.ISemanticMarkupOutputView;
@@ -197,6 +200,8 @@ public class ClientModule extends AbstractGinModule {
 		bind(IMatrixGenerationProcessView.Presenter.class).to(MatrixGenerationProcessPresenter.class);
 		bind(IMatrixGenerationReviewView.class).to(MatrixGenerationReviewView.class);
 		bind(IMatrixGenerationReviewView.Presenter.class).to(MatrixGenerationReviewPresenter.class);
+		bind(IReviewView.class).to(ReviewView.class).in(Singleton.class);
+		bind(IReviewView.Presenter.class).to(ReviewPresenter.class).in(Singleton.class);
 		bind(IMatrixGenerationOutputView.class).to(MatrixGenerationOutputView.class);
 		bind(IMatrixGenerationOutputView.Presenter.class).to(MatrixGenerationOutputPresenter.class);
 		

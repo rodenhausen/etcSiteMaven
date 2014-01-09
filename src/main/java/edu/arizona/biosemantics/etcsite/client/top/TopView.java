@@ -7,6 +7,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 import edu.arizona.biosemantics.etcsite.client.common.ImageLabel;
@@ -37,6 +38,9 @@ public class TopView extends Composite implements ITopView {
 	
 	@UiField
 	ImageLabel help;
+	
+	@UiField
+	Label greetingLabel;
 	
 	public TopView() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -75,6 +79,11 @@ public class TopView extends Composite implements ITopView {
 	@UiHandler("logoutButton")
 	public void onLogout(ClickEvent event) {
 		presenter.onLogout();
+	}
+	
+	@Override
+	public void setGreeting(String text) {
+		this.greetingLabel.setText(text);
 	}
 
 }

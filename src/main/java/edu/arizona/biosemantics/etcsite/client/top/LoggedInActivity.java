@@ -48,6 +48,7 @@ public class LoggedInActivity implements Activity, Presenter {
 	@Override
 	public void start(AcceptsOneWidget panel, com.google.gwt.event.shared.EventBus eventBus) {
 		topView.setPresenter(this);
+		topView.setGreeting("Hello " + Authentication.getInstance().getUsername());
 		panel.setWidget(topView.asWidget());
 		this.resumableTasksTimer.scheduleRepeating(1000);
 	}

@@ -6,9 +6,9 @@ import com.google.gwt.dom.client.NativeEvent;
 public class TaxonDnDHandler implements DnDHandler {
 
 	private int draggedTaxon = -1;
-	private ViewImpl viewImpl;
+	private ReviewView viewImpl;
 	
-	public TaxonDnDHandler(ViewImpl viewImpl) {
+	public TaxonDnDHandler(ReviewView viewImpl) {
 		this.viewImpl = viewImpl;
 	}
 	

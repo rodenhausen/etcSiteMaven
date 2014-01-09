@@ -11,8 +11,12 @@
 	<g:VerticalPanel>
 		<my:SubMenu ui:field="subMenu" step="REVIEW"/>
 		<g:VerticalPanel>
-			<re:ViewImpl ui:field="view"/>
-			<g:Button ui:field="nextButton">Next</g:Button>
+			<g:cell>
+				<re:IReviewView ui:field="view"/>
+			</g:cell>
+			<g:cell>
+				<g:Button ui:field="nextButton">Next</g:Button>
+			</g:cell>
 		</g:VerticalPanel>
 	</g:VerticalPanel>
 </ui:UiBinder> 

@@ -40,13 +40,12 @@ import edu.arizona.biosemantics.etcsite.shared.rpc.matrixGeneration.Matrix;
 import edu.arizona.biosemantics.etcsite.shared.rpc.matrixGeneration.Taxon;
 
 
-public class ViewImpl extends Composite implements IView, Handler {
+public class ReviewView extends Composite implements IReviewView, Handler {
 
 	private static ViewUiBinder uiBinder = GWT
 			.create(ViewUiBinder.class);
 	
-	@UiTemplate("View.ui.xml")
-	interface ViewUiBinder extends UiBinder<Widget, ViewImpl> {
+	interface ViewUiBinder extends UiBinder<Widget, ReviewView> {
 	}
 
 	/**
@@ -81,7 +80,7 @@ public class ViewImpl extends Composite implements IView, Handler {
 
 	private HandlerRegistration sortHandlerRegistration;
 	
-	public ViewImpl() {
+	public ReviewView() {
 		dataProvider = new ListDataProvider<Taxon>();
 		dataGrid = createDataGrid();
 	    dataProvider.addDataDisplay(dataGrid);

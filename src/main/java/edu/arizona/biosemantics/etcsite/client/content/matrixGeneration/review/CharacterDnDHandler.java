@@ -5,11 +5,11 @@ import com.google.gwt.dom.client.NativeEvent;
 
 public class CharacterDnDHandler implements DnDHandler {
 
-	private ViewImpl viewImpl;
+	private ReviewView viewImpl;
 	private int draggedCharacter = -1;
 	
 	
-	public CharacterDnDHandler(ViewImpl viewImpl) {
+	public CharacterDnDHandler(ReviewView viewImpl) {
 		super();
 		this.viewImpl = viewImpl;
 	}
