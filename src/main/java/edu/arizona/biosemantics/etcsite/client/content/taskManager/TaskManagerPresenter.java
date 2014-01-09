@@ -47,7 +47,7 @@ public class TaskManagerPresenter implements ITaskManagerView.Presenter {
 			MessageConfirmPresenter messagePresenter, final ITaskServiceAsync taskService, 
 			ISemanticMarkupServiceAsync semanticMarkupService,
 			IMatrixGenerationServiceAsync matrixGenerationService, ResumeTaskPlaceMapper resumeTaskPlaceMapper, 
-			IUserSelectView.Presenter usersSelectPresenter, IUsersView.Presenter usersPresenter) {
+			IUserSelectView.Presenter userSelectPresenter, IUsersView.Presenter usersPresenter) {
 		this.view = view;
 		this.view.setPresenter(this);
 		this.placeController = placeController;
