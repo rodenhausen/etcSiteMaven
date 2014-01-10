@@ -4,7 +4,7 @@
 	xmlns:my="urn:import:edu.arizona.biosemantics.etcsite.client.common">
 	<ui:style>
 		.home{
-		    /*background-image: url('../images/Home.gif'); */
+		    /*background-image: url('images/Home.gif'); */
 		    position: absolute;
 		    top: 5px;
 		    left: 5px;
@@ -25,7 +25,7 @@
 		    right: 600px;
 		}
 		.taskManager {
-		    /*background-image: url('../images/TaskManager.gif'); */
+		    /*background-image: url('images/TaskManager.gif'); */
 		    position: absolute;
 		    top: 5px;
 		    right: 450px;
@@ -40,7 +40,7 @@
 			right:410px;
 		}
 		.fileManager {
-		    /*background-image: url('../images/FileManager.gif'); */
+		    /*background-image: url('images/FileManager.gif'); */
 		    position: absolute;
 		    top: 5px;
 		    right: 300px;
@@ -55,7 +55,7 @@
 		    right: 290px;
 		}
 		.settings {
-		    /*background-image: url('../images/Settings.gif'); */
+		    /*background-image: url('images/Settings.gif'); */
 		    position: absolute;
 		    top: 5px;
 		    right: 280px;
@@ -70,7 +70,7 @@
 		    right: 170px;
 		}
 		.logoutButtonDiv {	
-		    /*background-image: url('../images/Button.gif');
+		    /*background-image: url('images/Button.gif');
 		    background-size: 100% 100%;
 		    width: 70px;
 		    height: 20px;*/
@@ -86,7 +86,7 @@
 			cursor: pointer;
 		}
 		.helpIcon {
-		    /*background-image: url('../images/Help.gif');*/
+		    /*background-image: url('images/Help.gif');*/
 		    position: absolute; 
 		    background-size: contain; 
 		    top: 5px;

@@ -10,11 +10,11 @@
 			left: 0px;
 		}
 		.semanticMarkupImage {
-		    background-image: url('../images/SemanticMarkup.gif');
+		    background-image: url('images/SemanticMarkup.gif');
 		    top: 0px;
 		}
 		.matrixGenerationImage {
-		    background-image: url('../images/MatrixGeneration.gif');
+		    background-image: url('images/MatrixGeneration.gif');
 		    top: 100px;
 		}
 		.actionText {
@@ -25,11 +25,11 @@
 		    left: 60px;
 		}
 		.semanticMarkupText {
-		    background-image: url('../images/Text.SemanticMarkup2.gif');
+		    background-image: url('images/Text.SemanticMarkup2.gif');
 		    top: 0px;
 		}
 		.matrixGenerationText {
-		    background-image: url('../images/Text.MatrixGeneration.gif');
+		    background-image: url('images/Text.MatrixGeneration.gif');
 		    top: 100px;
 		}
 		.actionDescription {
@@ -44,7 +44,7 @@
 		    top: 135px;
 		}
 		.actionArrow {
-		    background-image: url('../images/Arrow.gif');
+		    background-image: url('images/Arrow.gif');
 		    background-size: 100% 100%;
 		    width: 50px;
 		    height: 94px;
@@ -58,7 +58,7 @@
 		    top: 100px;
 		}
 		.actionButton  {
-		    /*background-image: url('../images/ButtonGreen.gif'); */
+		    /*background-image: url('images/ButtonGreen.gif'); */
 		    background-size: 100% 100%;
 		    width: 200px;
 		    height: 50px;
@@ -84,11 +84,11 @@
 		    left: 785px;
 		}
 		.treeGenerationImage {
-		    background-image: url('../images/TreeGeneration.gif');
+		    background-image: url('images/TreeGeneration.gif');
 		    top: 200px;
 		}
 		.treeGenerationText {
-		    background-image: url('../images/Text.TreeGeneration.gif');
+		    background-image: url('images/Text.TreeGeneration.gif');
 		    top: 200px;
 		}
 		.treeGenerationDescription {
@@ -107,11 +107,11 @@
 		    left: 790px;
 		}
 		.taxonomyComparisonImage {
-		    background-image: url('../images/TaxonomyComparison.gif');
+		    background-image: url('images/TaxonomyComparison.gif');
 		    top: 300px;
 		}
 		.taxonomyComparisonText {
-		    background-image: url('../images/Text.TaxonomyComparison.gif');
+		    background-image: url('images/Text.TaxonomyComparison.gif');
 		    width: 191px;
 		    height: 29px;
 		    top: 300px;
@@ -132,11 +132,11 @@
 		    left: 771px;
 		}
 		.visualizationImage {
-		    background-image: url('../images/Visualization.gif');
+		    background-image: url('images/Visualization.gif');
 		    top: 400px;
 		}
 		.visualizationText {
-		    background-image: url('../images/Text.Visualization.gif');
+		    background-image: url('images/Text.Visualization.gif');
 		    width: 191px;
 		    height: 24px;
 		    top: 400px;
@@ -157,7 +157,7 @@
 		    left: 795px;
 		}
 		.orText {
-		    background-image: url('../images/Text.Or.gif');
+		    background-image: url('images/Text.Or.gif');
 		    background-size: 100% 100%;
 		    width: 50px;
 		    height: 39px;
@@ -166,7 +166,7 @@
 		    left: 690px;
 		}
 		.pipelineButton {
-		    background-image: url('../images/ButtonGray.gif');
+		    background-image: url('images/ButtonGray.gif');
 		    background-size: 100% 100%;
 		    width: 200px;
 		    height: 50px;

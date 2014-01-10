@@ -4,7 +4,7 @@
 	xmlns:my="urn:import:edu.arizona.biosemantics.etcsite.client.common">
 	<ui:style>
 		.helpIcon {
-		    /*background-image: url('../images/Help.gif');*/
+		    /*background-image: url('images/Help.gif');*/
 		    position: absolute; 
 		    background-size: contain; 
 		    top: 5px;
@@ -18,7 +18,7 @@
 		    right: 15px;
 		}
 		.loginButtonDiv {
-		    /*background-image: url('../images/Button.gif');
+		    /*background-image: url('images/Button.gif');
 		    background-size: 100% 100%;
 		    width: 70px;
 		    height: 20px; */

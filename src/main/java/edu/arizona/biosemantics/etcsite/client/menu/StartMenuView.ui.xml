@@ -3,7 +3,7 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
 		.menuStart {
-		    background-image: url('../images/Menu_start.gif');
+		    background-image: url('images/Menu_start.gif');
 		    background-size: 100% 100%;
 		    width: 100%;
 		    height: 130px;
@@ -14,7 +14,7 @@
 		    left: 0px;
 		}
 		.etcPipelineText {
-		    background-image: url('../images/Text.TheETCPipeLine.gif');
+		    background-image: url('images/Text.TheETCPipeLine.gif');
 		    background-size: 100% 100%;
 		    width: 200px;
 		    height: 34px;
@@ -24,7 +24,7 @@
 		    margin-left: -400px;
 		}
 		.features {
-		    background-image: url('../images/Features.gif');
+		    background-image: url('images/Features.gif');
 		    background-size: 100% 100%;
 		    width: 167px;
 		    height: 100px;
@@ -42,7 +42,7 @@
 		    margin-left: -150px;
 		}
 		.featuresText {
-		    background-image: url('../images/Text.Features.gif');
+		    background-image: url('images/Text.Features.gif');
 		    background-size: 100% 100%;
 		    width: 79px;
 		    height: 19px;
@@ -81,7 +81,7 @@
 		    left: 45px;
 		}
 		.bullet {
-			background-image: url('../images/Success.gif');
+			background-image: url('images/Success.gif');
     		background-size: 100% 100%;
    			width: 15px;
     		height: 12px;
