@@ -61,18 +61,5 @@ public class FileTreeView extends Composite implements IFileTreeView {
 	public void setSelectedItem(FileImageLabelTreeItem item) {
 		this.fileTree.setSelectedItem(item);
 	}
-	
-	@Override
-	public void removeFromParent() {
-		Widget parent = this.getParent();
-		if(parent == null) {
-			System.out.println(System.identityHashCode(this) + "(" + this.getClass() + ") will be added somewhere");
-		}
-		else {
-			System.out.println(System.identityHashCode(this) + "(" + this.getClass() + ") will be removed from parent " + System.identityHashCode(parent) + "(" + parent.getClass() + ")");
-		}
 		
-		super.removeFromParent();
-	}
-	
 }

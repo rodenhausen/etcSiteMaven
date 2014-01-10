@@ -34,7 +34,7 @@ public class MatrixGenerationInputPresenter implements IMatrixGenerationInputVie
 			IMatrixGenerationServiceAsync matrixGenerationService,
 			PlaceController placeController, 
 			ISelectableFileTreeView.Presenter selectableFileTreePresenter,
-			@Named("Selectable")IFileTreeView.Presenter fileTreePresenter,
+			IFileTreeView.Presenter fileTreePresenter,
 			IMessageView.Presenter messagePresenter, 
 			FilePathShortener filePathShortener,
 			IFileManagerDialogView.Presenter fileManagerDialogPresenter

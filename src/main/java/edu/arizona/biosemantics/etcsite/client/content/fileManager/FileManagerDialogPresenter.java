@@ -13,7 +13,7 @@ public class FileManagerDialogPresenter implements IFileManagerDialogView.Presen
 
 	@Inject
 	public FileManagerDialogPresenter(IFileManagerDialogView view, 
-			@Named("Dialog")IManagableFileTreeView.Presenter managableFileTreePresenter) {
+			IManagableFileTreeView.Presenter managableFileTreePresenter) {
 		this.view = view;
 		this.managableFileTreePresenter = managableFileTreePresenter;
 	}

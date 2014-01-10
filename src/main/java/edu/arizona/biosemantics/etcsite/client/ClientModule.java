@@ -29,6 +29,7 @@ import edu.arizona.biosemantics.etcsite.client.common.TextInputView;
 import edu.arizona.biosemantics.etcsite.client.common.files.DnDFileTreePresenter;
 import edu.arizona.biosemantics.etcsite.client.common.files.FileContentPresenter;
 import edu.arizona.biosemantics.etcsite.client.common.files.FileContentView;
+import edu.arizona.biosemantics.etcsite.client.common.files.FileDragDropHandler;
 import edu.arizona.biosemantics.etcsite.client.common.files.FileTreeDecorator;
 import edu.arizona.biosemantics.etcsite.client.common.files.FileTreePresenter;
 import edu.arizona.biosemantics.etcsite.client.common.files.FileTreeView;
@@ -57,6 +58,7 @@ import edu.arizona.biosemantics.etcsite.client.content.annotationReview.XMLEdito
 import edu.arizona.biosemantics.etcsite.client.content.annotationReview.XMLEditorView;
 import edu.arizona.biosemantics.etcsite.client.content.fileManager.FileManagerDialogPresenter;
 import edu.arizona.biosemantics.etcsite.client.content.fileManager.FileManagerDialogView;
+import edu.arizona.biosemantics.etcsite.client.content.fileManager.FileManagerPresenter;
 import edu.arizona.biosemantics.etcsite.client.content.fileManager.FileManagerView;
 import edu.arizona.biosemantics.etcsite.client.content.fileManager.IFileManagerDialogView;
 import edu.arizona.biosemantics.etcsite.client.content.fileManager.IFileManagerDialogView.Presenter;
@@ -164,32 +166,22 @@ public class ClientModule extends AbstractGinModule {
 		bind(ISettingsView.class).to(SettingsView.class);
 		bind(ITaskManagerView.class).to(TaskManagerView.class);
 		bind(ITaskManagerView.Presenter.class).to(TaskManagerPresenter.class);
-		bind(IFileManagerView.class).to(FileManagerView.class);
 		
+		bind(IFileManagerView.Presenter.class).toProvider(FileManagerPresenterProvider.class).in(Singleton.class);
 		bind(IFileManagerDialogView.Presenter.class).toProvider(FileManagerDialogPresenterProvider.class).in(Singleton.class);
+		bind(ISelectableFileTreeView.Presenter.class).toProvider(SelectableFileTreePresenterProvider.class).in(Singleton.class);
 		
 		bind(IUsersView.class).to(UsersView.class);
 		bind(IUsersView.Presenter.class).to(UsersPresenter.class);
 		bind(IUserSelectView.class).to(UserSelectView.class);
 		bind(IUserSelectView.Presenter.class).to(UserSelectPresenter.class);
-		
-		//FileTreeView may not be singleton as it is a child for e.g. SelectableFileTreeView and
-		//MangabableFileTreeView. As a widget can only have one parent at a time it can't be a singleton,
-		//or has to be added to the parent view explicitly every time before the parent is rendered.
-		//bind(FileTreeView.class).in(Singleton.class);
-		bind(IFileTreeView.Presenter.class).annotatedWith(Names.named("Managable")).to(DnDFileTreePresenter.class).in(Singleton.class);
-		bind(IFileTreeView.Presenter.class).annotatedWith(Names.named("Selectable")).to(FileTreePresenter.class).in(Singleton.class);
-		bind(IFileTreeView.Presenter.class).annotatedWith(Names.named("Savable")).to(FileTreePresenter.class).in(Singleton.class);
+				
+		bind(IFileTreeView.Presenter.class).to(FileTreePresenter.class);
 		bind(IFileTreeView.class).to(FileTreeView.class);
-		bind(IManagableFileTreeView.Presenter.class).annotatedWith(Names.named("Dialog")).to(ManagableFileTreePresenter.class).in(Singleton.class);
-		bind(IManagableFileTreeView.Presenter.class).annotatedWith(Names.named("FileManager")).to(ManagableFileTreePresenter.class).in(Singleton.class);
+		bind(IManagableFileTreeView.Presenter.class).to(ManagableFileTreePresenter.class);
 		bind(IManagableFileTreeView.class).to(ManagableFileTreeView.class);
-		bind(IFileContentView.class).to(FileContentView.class).in(Singleton.class);
-		bind(IFileContentView.Presenter.class).to(FileContentPresenter.class).in(Singleton.class);
-		bind(ISelectableFileTreeView.class).to(SelectableFileTreeView.class).in(Singleton.class);
-		bind(ISelectableFileTreeView.Presenter.class).to(SelectableFileTreePresenter.class).in(Singleton.class);
-		bind(ISavableFileTreeView.class).to(SavableFileTreeView.class).in(Singleton.class);
-		bind(ISavableFileTreeView.Presenter.class).to(SavableFileTreePresenter.class).in(Singleton.class);
+		bind(IFileContentView.class).to(FileContentView.class);
+		bind(IFileContentView.Presenter.class).to(FileContentPresenter.class);		
 		
 		bind(ITextInputView.class).to(TextInputView.class);
 		bind(ITextInputView.Presenter.class).to(TextInputPresenter.class);
@@ -273,6 +265,33 @@ public class ClientModule extends AbstractGinModule {
 		bind(FilePathShortener.class).in(Singleton.class);
 	}
 	
+	public static class FileManagerPresenterProvider implements Provider<IFileManagerView.Presenter> {
+
+		private IManagableFileTreeView managableFileTreeView;
+		private IManagableFileTreeView.Presenter managableFileTreePresenter;
+		private IFileManagerView fileManagerView;
+		private IFileManagerView.Presenter fileManagerPresenter;
+		private IFileTreeView.Presenter fileTreePresenter;
+		private IFileTreeView fileTreeView;
+		
+		@Inject
+		public FileManagerPresenterProvider(IFileServiceAsync fileService, FileTreeDecorator fileTreeDecorator, FileDragDropHandler
+				fileDragDropHandler, IMessageView.Presenter messagePresenter, ITextInputView.Presenter textInputPresenter, 
+				PlaceController placeController) {
+			fileTreeView = new FileTreeView();
+			fileTreePresenter = new DnDFileTreePresenter(fileTreeView, fileService, fileTreeDecorator, fileDragDropHandler);
+			managableFileTreeView = new ManagableFileTreeView(fileTreePresenter);			
+			managableFileTreePresenter = new ManagableFileTreePresenter(managableFileTreeView, fileTreePresenter, fileService, 
+					messagePresenter, textInputPresenter);
+			fileManagerView = new FileManagerView(managableFileTreePresenter);
+			fileManagerPresenter = new FileManagerPresenter(placeController, fileManagerView, managableFileTreePresenter);
+		}
+		
+		@Override
+		public IFileManagerView.Presenter get() {
+			return fileManagerPresenter;
+		}
+	}
 	
 	public static class FileManagerDialogPresenterProvider implements Provider<IFileManagerDialogView.Presenter> {
 
@@ -284,10 +303,10 @@ public class ClientModule extends AbstractGinModule {
 		private IFileTreeView fileTreeView;
 		
 		@Inject
-		public FileManagerDialogPresenterProvider(IFileServiceAsync fileService, FileTreeDecorator fileTreeDecorator, 
-				IMessageView.Presenter messagePresenter, ITextInputView.Presenter textInputPresenter) {
+		public FileManagerDialogPresenterProvider(IFileServiceAsync fileService, FileTreeDecorator fileTreeDecorator, FileDragDropHandler
+				fileDragDropHandler, IMessageView.Presenter messagePresenter, ITextInputView.Presenter textInputPresenter) {
 			fileTreeView = new FileTreeView();
-			fileTreePresenter = new FileTreePresenter(fileTreeView, fileService, fileTreeDecorator);
+			fileTreePresenter = new DnDFileTreePresenter(fileTreeView, fileService, fileTreeDecorator, fileDragDropHandler);
 			managableFileTreeView = new ManagableFileTreeView(fileTreePresenter);			
 			managableFileTreePresenter = new ManagableFileTreePresenter(managableFileTreeView, fileTreePresenter, fileService, 
 					messagePresenter, textInputPresenter);
@@ -298,6 +317,29 @@ public class ClientModule extends AbstractGinModule {
 		@Override
 		public IFileManagerDialogView.Presenter get() {
 			return fileManagerDialogPresenter;
+		}
+		
+	}
+	
+	public static class SelectableFileTreePresenterProvider implements Provider<ISelectableFileTreeView.Presenter> {
+
+		private ISelectableFileTreeView selectableFileTreeView;
+		private ISelectableFileTreeView.Presenter selectableFileTreePresenter;
+		private IFileTreeView.Presenter fileTreePresenter;
+		private IFileTreeView fileTreeView;
+		
+		@Inject
+		public SelectableFileTreePresenterProvider(IFileServiceAsync fileService, FileTreeDecorator fileTreeDecorator, FileDragDropHandler
+				fileDragDropHandler, IMessageView.Presenter messagePresenter, ITextInputView.Presenter textInputPresenter) {
+			fileTreeView = new FileTreeView();
+			fileTreePresenter = new FileTreePresenter(fileTreeView, fileService, fileTreeDecorator);
+			selectableFileTreeView = new SelectableFileTreeView(fileTreePresenter);
+			selectableFileTreePresenter = new SelectableFileTreePresenter(selectableFileTreeView, fileTreePresenter);
+		}
+		
+		@Override
+		public ISelectableFileTreeView.Presenter get() {
+			return selectableFileTreePresenter;
 		}
 		
 	}

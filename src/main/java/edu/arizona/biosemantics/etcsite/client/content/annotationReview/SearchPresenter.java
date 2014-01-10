@@ -31,7 +31,7 @@ public class SearchPresenter implements ISearchView.Presenter {
 
 	@Inject
 	public SearchPresenter(@Named("AnnotationReview")EventBus eventBus, ISearchView view, IFileServiceAsync fileService, IFileSearchServiceAsync fileSearchService, 
-			ISelectableFileTreeView.Presenter selectableFileTreePresenter, @Named("Selectable")IFileTreeView.Presenter fileTreePresenter) {
+			ISelectableFileTreeView.Presenter selectableFileTreePresenter, IFileTreeView.Presenter fileTreePresenter) {
 		this.eventBus = eventBus;
 		this.view = view;
 		view.setPresenter(this);

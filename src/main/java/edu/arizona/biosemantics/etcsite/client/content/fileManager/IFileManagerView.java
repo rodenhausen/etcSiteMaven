@@ -10,6 +10,8 @@ public interface IFileManagerView extends IsWidget {
 
 		IsWidget getView();
 
+		void refresh();
+
 	}
 
 	void setPresenter(Presenter presenter);

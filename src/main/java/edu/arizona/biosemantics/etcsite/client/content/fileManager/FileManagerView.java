@@ -29,9 +29,8 @@ public class FileManagerView extends Composite implements IFileManagerView {
 	Anchor annotationReviewAnchor;
 	
 	@Inject
-	public FileManagerView(@Named("FileManager")IManagableFileTreeView.Presenter managableFileTreePresenter) {
+	public FileManagerView(IManagableFileTreeView.Presenter managableFileTreePresenter) {
 		this.managableFileTreeView = managableFileTreePresenter.getView();
-		System.out.println("file manager " + System.identityHashCode(managableFileTreeView));
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 

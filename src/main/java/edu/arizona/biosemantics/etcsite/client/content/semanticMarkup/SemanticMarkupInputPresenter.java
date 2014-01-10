@@ -35,7 +35,6 @@ public class SemanticMarkupInputPresenter implements ISemanticMarkupInputView.Pr
 	public SemanticMarkupInputPresenter(ISemanticMarkupInputView view, PlaceController 
 			placeController, ISemanticMarkupServiceAsync semanticMarkupService, 
 			ISelectableFileTreeView.Presenter selectableFileTreePresenter,
-			@Named("Selectable")IFileTreeView.Presenter fileTreePresenter,
 			IMessageView.Presenter messagePresenter, 
 			FilePathShortener filePathShortener,
 			IFileManagerDialogView.Presenter fileManagerDialogPresenter
@@ -46,7 +45,7 @@ public class SemanticMarkupInputPresenter implements ISemanticMarkupInputView.Pr
 		this.semanticMarkupService = semanticMarkupService;
 		
 		this.selectableFileTreePresenter = selectableFileTreePresenter;
-		this.fileTreePresenter = fileTreePresenter;
+		this.fileTreePresenter = selectableFileTreePresenter.getFileTreePresenter();
 		this.messagePresenter = messagePresenter;
 		this.filePathShortener = filePathShortener;
 		this.fileManagerDialogPresenter = fileManagerDialogPresenter;

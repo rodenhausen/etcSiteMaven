@@ -14,7 +14,7 @@ public class FileManagerDialogView implements IFileManagerDialogView {
 	IManagableFileTreeView managableFileTreeView;
 	
 	@Inject
-	public FileManagerDialogView(@Named("Dialog")IManagableFileTreeView.Presenter managableFileTreePresenter) {
+	public FileManagerDialogView(IManagableFileTreeView.Presenter managableFileTreePresenter) {
 		this.managableFileTreeView = managableFileTreePresenter.getView();
 		System.out.println("FileManagerDialogView " + System.identityHashCode(managableFileTreeView));
 		this.dialogBox = new TitleCloseDialogBox(false, "File Manager");
@@ -24,10 +24,6 @@ public class FileManagerDialogView implements IFileManagerDialogView {
 
 	@Override
 	public void show() {
-		dialogBox.setWidget(managableFileTreeView);
-		Widget parent = managableFileTreeView.asWidget().getParent();
-		System.out.println(System.identityHashCode(parent) + " " + parent.getClass());
-		System.out.println(System.identityHashCode(dialogBox) + " " + dialogBox.getClass());
 		dialogBox.center();
 	}
 

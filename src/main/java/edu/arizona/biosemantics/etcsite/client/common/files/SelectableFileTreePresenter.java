@@ -4,6 +4,7 @@ import com.google.gwt.user.client.ui.TitleCloseDialogBox;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
+import edu.arizona.biosemantics.etcsite.client.common.files.ISelectableFileTreeView.Presenter;
 import edu.arizona.biosemantics.etcsite.shared.file.FileFilter;
 
 public class SelectableFileTreePresenter implements ISelectableFileTreeView.Presenter {
@@ -16,7 +17,7 @@ public class SelectableFileTreePresenter implements ISelectableFileTreeView.Pres
 	
 	@Inject
 	public SelectableFileTreePresenter(ISelectableFileTreeView view, 
-			@Named("Selectable")IFileTreeView.Presenter fileTreePresenter) {
+			IFileTreeView.Presenter fileTreePresenter) {
 		this.view = view;
 		this.view.setPresenter(this);
 		this.dialogBox = new TitleCloseDialogBox(true, "Select File");
@@ -32,6 +33,11 @@ public class SelectableFileTreePresenter implements ISelectableFileTreeView.Pres
 		dialogBox.center();
 		this.fileFilter = fileFilter;
 		fileTreePresenter.refresh(fileFilter);
+	}
+	
+	@Override
+	public void hide() {
+		dialogBox.hide();
 	}
 	
 	@Override
@@ -53,6 +59,11 @@ public class SelectableFileTreePresenter implements ISelectableFileTreeView.Pres
 	
 	public interface ISelectListener {
 		public void onSelect();
+	}
+
+	@Override
+	public IFileTreeView.Presenter getFileTreePresenter() {
+		return this.fileTreePresenter;
 	}
 
 }

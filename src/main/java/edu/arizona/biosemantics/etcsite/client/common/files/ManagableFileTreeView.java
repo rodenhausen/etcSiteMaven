@@ -46,7 +46,7 @@ public class ManagableFileTreeView extends Composite implements IManagableFileTr
 	Button addButton;
 	
 	@Inject
-	public ManagableFileTreeView(@Named("Managable")IFileTreeView.Presenter fileTreePresenter) {
+	public ManagableFileTreeView(IFileTreeView.Presenter fileTreePresenter) {
 		this.fileTreeView = fileTreePresenter.getView();
 		initWidget(uiBinder.createAndBindUi(this));
 		statusWidgetContainer.setWidget(uploader.getStatusWidget().getWidget());
@@ -114,18 +114,5 @@ public class ManagableFileTreeView extends Composite implements IManagableFileTr
 	@Override
 	public Button getAddButton() {
 		return this.addButton;
-	}
-	
-	@Override
-	public void removeFromParent() {
-		Widget parent = this.getParent();
-		if(parent == null) {
-			System.out.println(System.identityHashCode(this) + "(" + this.getClass() + ") will be added somewhere");
-		}
-		else {
-			System.out.println(System.identityHashCode(this) + "(" + this.getClass() + ") will be removed from parent " + System.identityHashCode(parent) + "(" + parent.getClass() + ")");
-		}
-		
-		super.removeFromParent();
 	}
 }

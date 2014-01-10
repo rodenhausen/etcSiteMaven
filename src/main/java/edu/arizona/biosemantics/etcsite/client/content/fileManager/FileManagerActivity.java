@@ -2,38 +2,24 @@ package edu.arizona.biosemantics.etcsite.client.content.fileManager;
 
 import com.google.gwt.activity.shared.MyActivity;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
-import edu.arizona.biosemantics.etcsite.client.common.files.IManagableFileTreeView;
-import edu.arizona.biosemantics.etcsite.client.content.annotationReview.AnnotationReviewPlace;
-import edu.arizona.biosemantics.etcsite.client.content.fileManager.IFileManagerView.Presenter;
-import edu.arizona.biosemantics.etcsite.shared.file.FileFilter;
 
-public class FileManagerActivity implements MyActivity, Presenter {
+public class FileManagerActivity implements MyActivity {
 
-	private PlaceController placeController;
-	private IFileManagerView fileManagerView;
-	private IManagableFileTreeView.Presenter managableFileTreePresenter;
+	private IFileManagerView.Presenter fileManagerPresenter;
 	
 	@Inject
-	public FileManagerActivity(PlaceController placeController, 
-			IFileManagerView fileManagerView, 
-			@Named("FileManager")IManagableFileTreeView.Presenter managableFileTreePresenter) {
+	public FileManagerActivity(IFileManagerView.Presenter fileManagerPresenter) {
 		super();
-		this.placeController = placeController;
-		this.fileManagerView = fileManagerView;
-		fileManagerView.setPresenter(this);
-		this.managableFileTreePresenter = managableFileTreePresenter;
+		this.fileManagerPresenter = fileManagerPresenter;
 	}
 
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
-		panel.setWidget(fileManagerView);
-		managableFileTreePresenter.refresh(FileFilter.ALL);
+		fileManagerPresenter.refresh();
+		panel.setWidget(fileManagerPresenter.getView());
 	}
 
 	@Override
@@ -51,16 +37,6 @@ public class FileManagerActivity implements MyActivity, Presenter {
 	public void update() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public void onAnnotationReview() {
-		placeController.goTo(new AnnotationReviewPlace());
-	}
-
-	@Override
-	public IsWidget getView() {
-		return fileManagerView;
 	}
 
 }

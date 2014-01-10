@@ -30,7 +30,7 @@ public class SelectableFileTreeView extends Composite implements ISelectableFile
 	private Presenter presenter;
 	
 	@Inject
-	public SelectableFileTreeView(@Named("Selectable")IFileTreeView.Presenter fileTreePresenter) {
+	public SelectableFileTreeView(IFileTreeView.Presenter fileTreePresenter) {
 		this.fileTreeView = fileTreePresenter.getView();
 		initWidget(uiBinder.createAndBindUi(this));
 	}

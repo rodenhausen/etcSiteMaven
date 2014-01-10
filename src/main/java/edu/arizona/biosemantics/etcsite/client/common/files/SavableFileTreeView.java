@@ -31,7 +31,7 @@ public class SavableFileTreeView extends Composite implements ISavableFileTreeVi
 	IFileTreeView fileTreeView;
 	
 	@Inject
-	public SavableFileTreeView(@Named("Savable")IFileTreeView.Presenter fileTreePresenter) {
+	public SavableFileTreeView(IFileTreeView.Presenter fileTreePresenter) {
 		this.fileTreeView = fileTreePresenter.getView();
 		initWidget(uiBinder.createAndBindUi(this));
 	}
