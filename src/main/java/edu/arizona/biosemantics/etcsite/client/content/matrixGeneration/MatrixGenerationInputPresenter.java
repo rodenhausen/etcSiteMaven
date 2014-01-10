@@ -47,7 +47,7 @@ public class MatrixGenerationInputPresenter implements IMatrixGenerationInputVie
 		this.fileTreePresenter = fileTreePresenter;
 		this.messagePresenter = messagePresenter;
 		this.filePathShortener = filePathShortener;
-		//this.fileManagerDialogPresenter = fileManagerDialogPresenter;
+		this.fileManagerDialogPresenter = fileManagerDialogPresenter;
 	}
 	
 	@Override
