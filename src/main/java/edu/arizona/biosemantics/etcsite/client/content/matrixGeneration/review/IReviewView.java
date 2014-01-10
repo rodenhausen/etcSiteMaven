@@ -12,6 +12,7 @@ public interface IReviewView extends IsWidget {
 	public interface Presenter {
 		void onSave();
 		void refresh(Task task);
+		IReviewView getView();
 	}
 
 	void setPresenter(Presenter presenter);

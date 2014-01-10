@@ -16,7 +16,7 @@ public class MatrixGenerationReviewPresenter implements IMatrixGenerationReviewV
 	private IMatrixGenerationServiceAsync matrixGenerationService;
 	private IMatrixGenerationReviewView view;
 	private PlaceController placeController;
-	private Presenter reviewPresenter;
+	private IReviewView.Presenter reviewPresenter;
 
 	@Inject
 	public MatrixGenerationReviewPresenter(IMatrixGenerationReviewView view, 

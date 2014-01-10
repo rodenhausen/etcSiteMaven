@@ -25,9 +25,9 @@ public class MatrixGenerationReviewView extends Composite implements IMatrixGene
 	IReviewView view;
 	
 	@Inject
-	public MatrixGenerationReviewView(IReviewView view) {
+	public MatrixGenerationReviewView(IReviewView.Presenter reviewPresenter) {
 		super();
-		this.view = view;
+		this.view = reviewPresenter.getView();
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 

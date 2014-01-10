@@ -206,7 +206,7 @@ public class ClientModule extends AbstractGinModule {
 		bind(IMatrixGenerationReviewView.class).to(MatrixGenerationReviewView.class);
 		bind(IMatrixGenerationReviewView.Presenter.class).to(MatrixGenerationReviewPresenter.class);
 		bind(IReviewView.class).to(ReviewView.class);
-		bind(IReviewView.Presenter.class).to(ReviewPresenter.class);
+		bind(IReviewView.Presenter.class).to(ReviewPresenter.class).in(Singleton.class);
 		bind(IMatrixGenerationOutputView.class).to(MatrixGenerationOutputView.class);
 		bind(IMatrixGenerationOutputView.Presenter.class).to(MatrixGenerationOutputPresenter.class);
 		
