@@ -12,6 +12,7 @@ public interface IFileTreeView extends IsWidget {
 		void clearSelection();
 		void refresh(FileFilter fileFilter);
 		void addSelectionListener(IFileTreeSelectionListener listener);
+		IFileTreeView getView();
 	}
 	  
 	void setPresenter(Presenter presenter);

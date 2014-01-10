@@ -19,7 +19,7 @@ public interface IManagableFileTreeView extends IsWidget {
 
 		void onDownload();
 
-		IsWidget getView();
+		IManagableFileTreeView getView();
 		
 		void refresh(FileFilter fileFilter);
 

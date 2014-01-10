@@ -43,6 +43,7 @@ public class ManagableFileTreePresenter implements IManagableFileTreeView.Presen
 			@Named("Managable")IFileTreeView.Presenter fileTreePresenter, 
 			IFileServiceAsync fileService, MessagePresenter messagePresenter, 
 			ITextInputView.Presenter textInputPresenter) {
+		System.out.println("ManagableFileTreePresenter " + System.identityHashCode(view));
 		this.fileService = fileService;
 		this.view = view;
 		this.view.setPresenter(this);

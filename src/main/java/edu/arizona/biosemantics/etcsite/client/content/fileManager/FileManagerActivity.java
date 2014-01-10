@@ -6,6 +6,7 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 import edu.arizona.biosemantics.etcsite.client.common.files.IManagableFileTreeView;
 import edu.arizona.biosemantics.etcsite.client.content.annotationReview.AnnotationReviewPlace;
@@ -21,7 +22,7 @@ public class FileManagerActivity implements MyActivity, Presenter {
 	@Inject
 	public FileManagerActivity(PlaceController placeController, 
 			IFileManagerView fileManagerView, 
-			IManagableFileTreeView.Presenter managableFileTreePresenter) {
+			@Named("FileManager")IManagableFileTreeView.Presenter managableFileTreePresenter) {
 		super();
 		this.placeController = placeController;
 		this.fileManagerView = fileManagerView;

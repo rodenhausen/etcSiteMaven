@@ -1,7 +1,6 @@
 package edu.arizona.biosemantics.etcsite.client.content.matrixGeneration;
 
 import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.user.client.ui.TitleCloseDialogBox;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -9,10 +8,9 @@ import edu.arizona.biosemantics.etcsite.client.common.Authentication;
 import edu.arizona.biosemantics.etcsite.client.common.IMessageView;
 import edu.arizona.biosemantics.etcsite.client.common.files.FileImageLabelTreeItem;
 import edu.arizona.biosemantics.etcsite.client.common.files.IFileTreeView;
-import edu.arizona.biosemantics.etcsite.client.common.files.IManagableFileTreeView;
 import edu.arizona.biosemantics.etcsite.client.common.files.ISelectableFileTreeView;
 import edu.arizona.biosemantics.etcsite.client.common.files.SelectableFileTreePresenter.ISelectListener;
-import edu.arizona.biosemantics.etcsite.client.content.fileManager.IFileManagerView;
+import edu.arizona.biosemantics.etcsite.client.content.fileManager.IFileManagerDialogView;
 import edu.arizona.biosemantics.etcsite.shared.db.Task;
 import edu.arizona.biosemantics.etcsite.shared.file.FileFilter;
 import edu.arizona.biosemantics.etcsite.shared.file.FilePathShortener;
@@ -24,37 +22,32 @@ public class MatrixGenerationInputPresenter implements IMatrixGenerationInputVie
 	private IMatrixGenerationInputView view;
 	private PlaceController placeController;
 	private IMatrixGenerationServiceAsync matrixGenerationService;
-	private TitleCloseDialogBox dialogBox;
-	private IManagableFileTreeView.Presenter managableFileTreePresenter;
 	private ISelectableFileTreeView.Presenter selectableFileTreePresenter;
 	private IFileTreeView.Presenter fileTreePresenter;
 	private IMessageView.Presenter messagePresenter;
 	private FilePathShortener filePathShortener;
 	private String inputFile;
+	private IFileManagerDialogView.Presenter fileManagerDialogPresenter;
 	
 	@Inject
 	public MatrixGenerationInputPresenter(IMatrixGenerationInputView view, 
 			IMatrixGenerationServiceAsync matrixGenerationService,
-			PlaceController placeController, IFileManagerView fileManagerView, 
-			IManagableFileTreeView.Presenter managableFileTreePresenter,
+			PlaceController placeController, 
 			ISelectableFileTreeView.Presenter selectableFileTreePresenter,
 			@Named("Selectable")IFileTreeView.Presenter fileTreePresenter,
 			IMessageView.Presenter messagePresenter, 
-			FilePathShortener filePathShortener
+			FilePathShortener filePathShortener,
+			IFileManagerDialogView.Presenter fileManagerDialogPresenter
 			) {
 		this.view = view;
 		view.setPresenter(this);;
 		this.matrixGenerationService = matrixGenerationService;
 		this.placeController = placeController;
-		this.managableFileTreePresenter = managableFileTreePresenter;
 		this.selectableFileTreePresenter = selectableFileTreePresenter;
 		this.fileTreePresenter = fileTreePresenter;
 		this.messagePresenter = messagePresenter;
 		this.filePathShortener = filePathShortener;
-		
-		this.dialogBox = new TitleCloseDialogBox(false, "File Manager");
-		dialogBox.setWidget(fileManagerView);
-		dialogBox.setGlassEnabled(true);
+		//this.fileManagerDialogPresenter = fileManagerDialogPresenter;
 	}
 	
 	@Override
@@ -70,9 +63,9 @@ public class MatrixGenerationInputPresenter implements IMatrixGenerationInputVie
 					view.setEnabledNext(true);			
 					if(!selection.getFileInfo().getOwner().equals(Authentication.getInstance().getUsername())) {
 						messagePresenter.showMessage("Shared input", "The selected input is not owned. To start the task the files will be copied to your own space.");
-						dialogBox.hide();
+						fileManagerDialogPresenter.hide();
 					} else {
-						dialogBox.hide();
+						fileManagerDialogPresenter.hide();
 					}
 				}
 			}
@@ -81,8 +74,7 @@ public class MatrixGenerationInputPresenter implements IMatrixGenerationInputVie
 
 	@Override
 	public void onFileManager() {
- 		dialogBox.show();
- 		managableFileTreePresenter.refresh(FileFilter.ALL);
+		fileManagerDialogPresenter.show();
 	}
 
 	@Override

@@ -28,7 +28,7 @@ public class FileTreePresenter implements IFileTreeView.Presenter {
 	private Set<IFileTreeSelectionListener> selectionListeners = new HashSet<IFileTreeSelectionListener>();
 	
 	@Inject
-	public FileTreePresenter(@Named("Selectable")IFileTreeView view, IFileServiceAsync fileService, FileTreeDecorator
+	public FileTreePresenter(IFileTreeView view, IFileServiceAsync fileService, FileTreeDecorator
 			fileTreeDecorator) {
 		this.view = view;
 		view.setPresenter(this);
@@ -103,6 +103,11 @@ public class FileTreePresenter implements IFileTreeView.Presenter {
 	@Override
 	public void addSelectionListener(IFileTreeSelectionListener listener) {
 		this.selectionListeners .add(listener);
+	}
+
+	@Override
+	public IFileTreeView getView() {
+		return view;
 	}
 	
 }

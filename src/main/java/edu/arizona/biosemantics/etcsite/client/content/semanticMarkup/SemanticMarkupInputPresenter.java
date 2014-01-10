@@ -2,7 +2,6 @@ package edu.arizona.biosemantics.etcsite.client.content.semanticMarkup;
 
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.TitleCloseDialogBox;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -10,11 +9,9 @@ import edu.arizona.biosemantics.etcsite.client.common.Authentication;
 import edu.arizona.biosemantics.etcsite.client.common.IMessageView;
 import edu.arizona.biosemantics.etcsite.client.common.files.FileImageLabelTreeItem;
 import edu.arizona.biosemantics.etcsite.client.common.files.IFileTreeView;
-import edu.arizona.biosemantics.etcsite.client.common.files.IManagableFileTreeView;
-import edu.arizona.biosemantics.etcsite.client.common.files.IManagableFileTreeView.Presenter;
 import edu.arizona.biosemantics.etcsite.client.common.files.ISelectableFileTreeView;
 import edu.arizona.biosemantics.etcsite.client.common.files.SelectableFileTreePresenter.ISelectListener;
-import edu.arizona.biosemantics.etcsite.client.content.fileManager.IFileManagerView;
+import edu.arizona.biosemantics.etcsite.client.content.fileManager.IFileManagerDialogView;
 import edu.arizona.biosemantics.etcsite.shared.db.Task;
 import edu.arizona.biosemantics.etcsite.shared.file.FileFilter;
 import edu.arizona.biosemantics.etcsite.shared.file.FilePathShortener;
@@ -27,37 +24,32 @@ public class SemanticMarkupInputPresenter implements ISemanticMarkupInputView.Pr
 	private ISemanticMarkupInputView view;
 	private PlaceController placeController;
 	private ISemanticMarkupServiceAsync semanticMarkupService;
-	private Presenter managableFileTreePresenter;
 	private edu.arizona.biosemantics.etcsite.client.common.files.ISelectableFileTreeView.Presenter selectableFileTreePresenter;
 	private edu.arizona.biosemantics.etcsite.client.common.files.IFileTreeView.Presenter fileTreePresenter;
 	private edu.arizona.biosemantics.etcsite.client.common.IMessageView.Presenter messagePresenter;
 	private FilePathShortener filePathShortener;
-	private TitleCloseDialogBox dialogBox;
 	private String inputFile;
+	private IFileManagerDialogView.Presenter fileManagerDialogPresenter;
 
 	@Inject
 	public SemanticMarkupInputPresenter(ISemanticMarkupInputView view, PlaceController 
 			placeController, ISemanticMarkupServiceAsync semanticMarkupService, 
-			IFileManagerView fileManagerView, 
-			IManagableFileTreeView.Presenter managableFileTreePresenter,
 			ISelectableFileTreeView.Presenter selectableFileTreePresenter,
 			@Named("Selectable")IFileTreeView.Presenter fileTreePresenter,
 			IMessageView.Presenter messagePresenter, 
-			FilePathShortener filePathShortener) {
+			FilePathShortener filePathShortener,
+			IFileManagerDialogView.Presenter fileManagerDialogPresenter
+			) {
 		this.view = view;
 		view.setPresenter(this);
 		this.placeController = placeController;
 		this.semanticMarkupService = semanticMarkupService;
 		
-		this.managableFileTreePresenter = managableFileTreePresenter;
 		this.selectableFileTreePresenter = selectableFileTreePresenter;
 		this.fileTreePresenter = fileTreePresenter;
 		this.messagePresenter = messagePresenter;
 		this.filePathShortener = filePathShortener;
-		
-		this.dialogBox = new TitleCloseDialogBox(false, "File Manager");
-		dialogBox.setWidget(fileManagerView);
-		dialogBox.setGlassEnabled(true);
+		this.fileManagerDialogPresenter = fileManagerDialogPresenter;
 	}
 	
 	@Override
@@ -96,9 +88,9 @@ public class SemanticMarkupInputPresenter implements ISemanticMarkupInputView.Pr
 					view.setEnabledNext(true);			
 					if(!selection.getFileInfo().getOwner().equals(Authentication.getInstance().getUsername())) {
 						messagePresenter.showMessage("Shared input", "The selected input is not owned. To start the task the files will be copied to your own space.");
-						dialogBox.hide();
+						fileManagerDialogPresenter.hide();
 					} else {
-						dialogBox.hide();
+						fileManagerDialogPresenter.hide();
 					}
 				}
 			}
@@ -106,9 +98,8 @@ public class SemanticMarkupInputPresenter implements ISemanticMarkupInputView.Pr
 	}
 
 	@Override
-	public void onFileManager() {
- 		dialogBox.show();
- 		managableFileTreePresenter.refresh(FileFilter.ALL);
+	public void onFileManager() {			
+		fileManagerDialogPresenter.show();
 	}
 
 }

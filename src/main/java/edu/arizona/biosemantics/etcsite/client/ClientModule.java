@@ -51,7 +51,10 @@ import edu.arizona.biosemantics.etcsite.client.content.annotationReview.SearchPr
 import edu.arizona.biosemantics.etcsite.client.content.annotationReview.SearchView;
 import edu.arizona.biosemantics.etcsite.client.content.annotationReview.XMLEditorPresenter;
 import edu.arizona.biosemantics.etcsite.client.content.annotationReview.XMLEditorView;
+import edu.arizona.biosemantics.etcsite.client.content.fileManager.FileManagerDialogPresenter;
+import edu.arizona.biosemantics.etcsite.client.content.fileManager.FileManagerDialogView;
 import edu.arizona.biosemantics.etcsite.client.content.fileManager.FileManagerView;
+import edu.arizona.biosemantics.etcsite.client.content.fileManager.IFileManagerDialogView;
 import edu.arizona.biosemantics.etcsite.client.content.fileManager.IFileManagerView;
 import edu.arizona.biosemantics.etcsite.client.content.help.HelpView;
 import edu.arizona.biosemantics.etcsite.client.content.help.IHelpView;
@@ -155,6 +158,10 @@ public class ClientModule extends AbstractGinModule {
 		bind(ITaskManagerView.Presenter.class).to(TaskManagerPresenter.class).in(Singleton.class);
 		bind(IFileManagerView.class).to(FileManagerView.class).in(Singleton.class);
 		
+		
+		bind(IFileManagerDialogView.class).to(FileManagerDialogView.class);
+		bind(IFileManagerDialogView.Presenter.class).to(FileManagerDialogPresenter.class).in(Singleton.class);
+		
 		bind(IUsersView.class).to(UsersView.class).in(Singleton.class);
 		bind(IUsersView.Presenter.class).to(UsersPresenter.class).in(Singleton.class);
 		bind(IUserSelectView.class).to(UserSelectView.class).in(Singleton.class);
@@ -164,13 +171,13 @@ public class ClientModule extends AbstractGinModule {
 		//MangabableFileTreeView. As a widget can only have one parent at a time it can't be a singleton,
 		//or has to be added to the parent view explicitly every time before the parent is rendered.
 		//bind(FileTreeView.class).in(Singleton.class);
-		bind(IFileTreeView.class).annotatedWith(Names.named("Managable")).to(FileTreeView.class).in(Singleton.class);
-		bind(IFileTreeView.Presenter.class).annotatedWith(Names.named("Managable")).to(DnDFileTreePresenter.class).in(Singleton.class);
-		bind(IFileTreeView.class).annotatedWith(Names.named("Selectable")).to(FileTreeView.class).in(Singleton.class);
-		bind(IFileTreeView.Presenter.class).annotatedWith(Names.named("Selectable")).to(FileTreePresenter.class).in(Singleton.class);
-		bind(IFileTreeView.class).annotatedWith(Names.named("Savable")).to(FileTreeView.class).in(Singleton.class);
-		bind(IManagableFileTreeView.class).to(ManagableFileTreeView.class).in(Singleton.class);
-		bind(IManagableFileTreeView.Presenter.class).to(ManagableFileTreePresenter.class).in(Singleton.class);
+		bind(IFileTreeView.Presenter.class).annotatedWith(Names.named("Managable")).to(DnDFileTreePresenter.class);
+		bind(IFileTreeView.Presenter.class).annotatedWith(Names.named("Selectable")).to(FileTreePresenter.class);
+		bind(IFileTreeView.Presenter.class).annotatedWith(Names.named("Savable")).to(FileTreePresenter.class);
+		bind(IFileTreeView.class).to(FileTreeView.class);
+		bind(IManagableFileTreeView.Presenter.class).annotatedWith(Names.named("Dialog")).to(ManagableFileTreePresenter.class).in(Singleton.class);
+		bind(IManagableFileTreeView.Presenter.class).annotatedWith(Names.named("FileManager")).to(ManagableFileTreePresenter.class).in(Singleton.class);
+		bind(IManagableFileTreeView.class).to(ManagableFileTreeView.class);
 		bind(IFileContentView.class).to(FileContentView.class).in(Singleton.class);
 		bind(IFileContentView.Presenter.class).to(FileContentPresenter.class).in(Singleton.class);
 		bind(ISelectableFileTreeView.class).to(SelectableFileTreeView.class).in(Singleton.class);

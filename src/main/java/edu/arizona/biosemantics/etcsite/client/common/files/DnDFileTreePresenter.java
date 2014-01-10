@@ -17,7 +17,7 @@ public class DnDFileTreePresenter extends FileTreePresenter implements IFileMove
 	private FileDragDropHandler fileDragDropHandler;
 	
 	@Inject
-	public DnDFileTreePresenter(@Named("Managable")IFileTreeView view, IFileServiceAsync fileService, 
+	public DnDFileTreePresenter(IFileTreeView view, IFileServiceAsync fileService, 
 			FileTreeDecorator fileTreeDecorator, FileDragDropHandler fileDragDropHandler) {
 		super(view, fileService, fileTreeDecorator);
 		this.fileDragDropHandler = fileDragDropHandler;

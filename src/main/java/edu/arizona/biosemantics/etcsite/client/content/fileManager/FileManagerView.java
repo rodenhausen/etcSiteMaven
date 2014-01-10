@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 import edu.arizona.biosemantics.etcsite.client.common.files.IManagableFileTreeView;
 
@@ -28,8 +29,9 @@ public class FileManagerView extends Composite implements IFileManagerView {
 	Anchor annotationReviewAnchor;
 	
 	@Inject
-	public FileManagerView(IManagableFileTreeView managableFileTreeView) {
-		this.managableFileTreeView = managableFileTreeView;
+	public FileManagerView(@Named("FileManager")IManagableFileTreeView.Presenter managableFileTreePresenter) {
+		this.managableFileTreeView = managableFileTreePresenter.getView();
+		System.out.println("file manager " + System.identityHashCode(managableFileTreeView));
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
