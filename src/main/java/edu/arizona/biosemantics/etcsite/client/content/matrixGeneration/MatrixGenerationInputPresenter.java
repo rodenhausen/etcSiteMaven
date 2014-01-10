@@ -34,7 +34,6 @@ public class MatrixGenerationInputPresenter implements IMatrixGenerationInputVie
 			IMatrixGenerationServiceAsync matrixGenerationService,
 			PlaceController placeController, 
 			ISelectableFileTreeView.Presenter selectableFileTreePresenter,
-			IFileTreeView.Presenter fileTreePresenter,
 			IMessageView.Presenter messagePresenter, 
 			FilePathShortener filePathShortener,
 			IFileManagerDialogView.Presenter fileManagerDialogPresenter
@@ -44,7 +43,7 @@ public class MatrixGenerationInputPresenter implements IMatrixGenerationInputVie
 		this.matrixGenerationService = matrixGenerationService;
 		this.placeController = placeController;
 		this.selectableFileTreePresenter = selectableFileTreePresenter;
-		this.fileTreePresenter = fileTreePresenter;
+		this.fileTreePresenter = selectableFileTreePresenter.getFileTreePresenter();
 		this.messagePresenter = messagePresenter;
 		this.filePathShortener = filePathShortener;
 		this.fileManagerDialogPresenter = fileManagerDialogPresenter;

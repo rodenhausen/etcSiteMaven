@@ -16,7 +16,6 @@ public class FileManagerDialogView implements IFileManagerDialogView {
 	@Inject
 	public FileManagerDialogView(IManagableFileTreeView.Presenter managableFileTreePresenter) {
 		this.managableFileTreeView = managableFileTreePresenter.getView();
-		System.out.println("FileManagerDialogView " + System.identityHashCode(managableFileTreeView));
 		this.dialogBox = new TitleCloseDialogBox(false, "File Manager");
 		dialogBox.setWidget(managableFileTreeView);
 		dialogBox.setGlassEnabled(true);
