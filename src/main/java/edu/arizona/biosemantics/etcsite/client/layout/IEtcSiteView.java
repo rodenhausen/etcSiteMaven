@@ -6,10 +6,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 public interface IEtcSiteView extends IsWidget {
 
 	public interface Presenter {
-		void setStart();
-		void setContent(IsWidget content);
-		void setLoggedIn();
-		void setLoggedOut();
+
 	}
 
 	void setTop(IsWidget content);	

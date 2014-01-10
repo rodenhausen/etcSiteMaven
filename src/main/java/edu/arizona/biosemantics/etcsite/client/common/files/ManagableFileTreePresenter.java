@@ -10,9 +10,11 @@ import com.google.inject.name.Named;
 
 import edu.arizona.biosemantics.etcsite.client.common.Authentication;
 import edu.arizona.biosemantics.etcsite.client.common.Configuration;
+import edu.arizona.biosemantics.etcsite.client.common.IMessageView;
 import edu.arizona.biosemantics.etcsite.client.common.ITextInputListener;
 import edu.arizona.biosemantics.etcsite.client.common.ITextInputView;
 import edu.arizona.biosemantics.etcsite.client.common.MessagePresenter;
+import edu.arizona.biosemantics.etcsite.client.common.MessageView;
 import edu.arizona.biosemantics.etcsite.client.common.files.IFileTreeView.IFileTreeSelectionListener;
 import edu.arizona.biosemantics.etcsite.shared.file.FileFilter;
 import edu.arizona.biosemantics.etcsite.shared.file.FileTypeEnum;
@@ -27,21 +29,20 @@ import gwtupload.client.IUploader;
 import gwtupload.client.IUploader.OnFinishUploaderHandler;
 import gwtupload.client.IUploader.OnStartUploaderHandler;
 
-
 public class ManagableFileTreePresenter implements IManagableFileTreeView.Presenter, IFileTreeSelectionListener {
 
 	private IFileServiceAsync fileService;
 	private IManagableFileTreeView view;
 	private IFileTreeView.Presenter fileTreePresenter;
 	private FileFilter fileFilter;
-	private MessagePresenter messagePresenter;
+	private IMessageView.Presenter messagePresenter;
 	private String defaultServletPath;
 	private ITextInputView.Presenter textInputPresenter;
 	
 	@Inject
 	public ManagableFileTreePresenter(IManagableFileTreeView view, 
 			@Named("Managable")IFileTreeView.Presenter fileTreePresenter, 
-			IFileServiceAsync fileService, MessagePresenter messagePresenter, 
+			IFileServiceAsync fileService, MessageView.Presenter messagePresenter, 
 			ITextInputView.Presenter textInputPresenter) {
 		System.out.println("ManagableFileTreePresenter " + System.identityHashCode(view));
 		this.fileService = fileService;

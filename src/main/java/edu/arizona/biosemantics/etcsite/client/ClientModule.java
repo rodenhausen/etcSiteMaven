@@ -9,7 +9,10 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
@@ -26,6 +29,7 @@ import edu.arizona.biosemantics.etcsite.client.common.TextInputView;
 import edu.arizona.biosemantics.etcsite.client.common.files.DnDFileTreePresenter;
 import edu.arizona.biosemantics.etcsite.client.common.files.FileContentPresenter;
 import edu.arizona.biosemantics.etcsite.client.common.files.FileContentView;
+import edu.arizona.biosemantics.etcsite.client.common.files.FileTreeDecorator;
 import edu.arizona.biosemantics.etcsite.client.common.files.FileTreePresenter;
 import edu.arizona.biosemantics.etcsite.client.common.files.FileTreeView;
 import edu.arizona.biosemantics.etcsite.client.common.files.IFileContentView;
@@ -55,6 +59,7 @@ import edu.arizona.biosemantics.etcsite.client.content.fileManager.FileManagerDi
 import edu.arizona.biosemantics.etcsite.client.content.fileManager.FileManagerDialogView;
 import edu.arizona.biosemantics.etcsite.client.content.fileManager.FileManagerView;
 import edu.arizona.biosemantics.etcsite.client.content.fileManager.IFileManagerDialogView;
+import edu.arizona.biosemantics.etcsite.client.content.fileManager.IFileManagerDialogView.Presenter;
 import edu.arizona.biosemantics.etcsite.client.content.fileManager.IFileManagerView;
 import edu.arizona.biosemantics.etcsite.client.content.help.HelpView;
 import edu.arizona.biosemantics.etcsite.client.content.help.IHelpView;
@@ -106,7 +111,6 @@ import edu.arizona.biosemantics.etcsite.client.content.user.UsersPresenter;
 import edu.arizona.biosemantics.etcsite.client.content.user.UsersView;
 import edu.arizona.biosemantics.etcsite.client.layout.ContentActivityManagerProvider;
 import edu.arizona.biosemantics.etcsite.client.layout.ContentActivityMapper;
-import edu.arizona.biosemantics.etcsite.client.layout.EtcSitePresenter;
 import edu.arizona.biosemantics.etcsite.client.layout.EtcSiteView;
 import edu.arizona.biosemantics.etcsite.client.layout.IEtcSiteView;
 import edu.arizona.biosemantics.etcsite.client.layout.MenuActivityManagerProvider;
@@ -143,37 +147,39 @@ import edu.arizona.biosemantics.etcsite.shared.rpc.IVisualizationServiceAsync;
 
 public class ClientModule extends AbstractGinModule {
 	
+	//convention: don't set view as singleton, unless for good reason. 
+	//A view should in the general case be a widget, which can only be attached to one parent at a time.
+	//If defined as singleton, it will with multiple use be attached to a new parent, hence disappear in another view.
+	//This is usually not the desired behavior. 
+	//Use providers or make presenter singleton and responsible of view 
 	protected void configure() {		
 		//views, presenter
-		bind(IEtcSiteView.class).to(EtcSiteView.class).in(Singleton.class);
-		bind(IEtcSiteView.Presenter.class).to(EtcSitePresenter.class).in(Singleton.class);
-		bind(ITopView.class).to(TopView.class).in(Singleton.class);
-		bind(ILoginTopView.class).to(LoginTopView.class).in(Singleton.class);
-		bind(IMenuView.class).to(MenuView.class).in(Singleton.class);
-		bind(IStartMenuView.class).to(StartMenuView.class).in(Singleton.class);
-		bind(IHomeContentView.class).to(HomeContentView.class).in(Singleton.class);
-		bind(IHelpView.class).to(HelpView.class).in(Singleton.class);
-		bind(ISettingsView.class).to(SettingsView.class).in(Singleton.class);
-		bind(ITaskManagerView.class).to(TaskManagerView.class).in(Singleton.class);
-		bind(ITaskManagerView.Presenter.class).to(TaskManagerPresenter.class).in(Singleton.class);
-		bind(IFileManagerView.class).to(FileManagerView.class).in(Singleton.class);
+		bind(IEtcSiteView.class).to(EtcSiteView.class);
+		bind(ITopView.class).to(TopView.class);
+		bind(ILoginTopView.class).to(LoginTopView.class);
+		bind(IMenuView.class).to(MenuView.class);
+		bind(IStartMenuView.class).to(StartMenuView.class);
+		bind(IHomeContentView.class).to(HomeContentView.class);
+		bind(IHelpView.class).to(HelpView.class);
+		bind(ISettingsView.class).to(SettingsView.class);
+		bind(ITaskManagerView.class).to(TaskManagerView.class);
+		bind(ITaskManagerView.Presenter.class).to(TaskManagerPresenter.class);
+		bind(IFileManagerView.class).to(FileManagerView.class);
 		
+		bind(IFileManagerDialogView.Presenter.class).toProvider(FileManagerDialogPresenterProvider.class).in(Singleton.class);
 		
-		bind(IFileManagerDialogView.class).to(FileManagerDialogView.class);
-		bind(IFileManagerDialogView.Presenter.class).to(FileManagerDialogPresenter.class).in(Singleton.class);
-		
-		bind(IUsersView.class).to(UsersView.class).in(Singleton.class);
-		bind(IUsersView.Presenter.class).to(UsersPresenter.class).in(Singleton.class);
-		bind(IUserSelectView.class).to(UserSelectView.class).in(Singleton.class);
-		bind(IUserSelectView.Presenter.class).to(UserSelectPresenter.class).in(Singleton.class);
+		bind(IUsersView.class).to(UsersView.class);
+		bind(IUsersView.Presenter.class).to(UsersPresenter.class);
+		bind(IUserSelectView.class).to(UserSelectView.class);
+		bind(IUserSelectView.Presenter.class).to(UserSelectPresenter.class);
 		
 		//FileTreeView may not be singleton as it is a child for e.g. SelectableFileTreeView and
 		//MangabableFileTreeView. As a widget can only have one parent at a time it can't be a singleton,
 		//or has to be added to the parent view explicitly every time before the parent is rendered.
 		//bind(FileTreeView.class).in(Singleton.class);
-		bind(IFileTreeView.Presenter.class).annotatedWith(Names.named("Managable")).to(DnDFileTreePresenter.class);
-		bind(IFileTreeView.Presenter.class).annotatedWith(Names.named("Selectable")).to(FileTreePresenter.class);
-		bind(IFileTreeView.Presenter.class).annotatedWith(Names.named("Savable")).to(FileTreePresenter.class);
+		bind(IFileTreeView.Presenter.class).annotatedWith(Names.named("Managable")).to(DnDFileTreePresenter.class).in(Singleton.class);
+		bind(IFileTreeView.Presenter.class).annotatedWith(Names.named("Selectable")).to(FileTreePresenter.class).in(Singleton.class);
+		bind(IFileTreeView.Presenter.class).annotatedWith(Names.named("Savable")).to(FileTreePresenter.class).in(Singleton.class);
 		bind(IFileTreeView.class).to(FileTreeView.class);
 		bind(IManagableFileTreeView.Presenter.class).annotatedWith(Names.named("Dialog")).to(ManagableFileTreePresenter.class).in(Singleton.class);
 		bind(IManagableFileTreeView.Presenter.class).annotatedWith(Names.named("FileManager")).to(ManagableFileTreePresenter.class).in(Singleton.class);
@@ -185,21 +191,21 @@ public class ClientModule extends AbstractGinModule {
 		bind(ISavableFileTreeView.class).to(SavableFileTreeView.class).in(Singleton.class);
 		bind(ISavableFileTreeView.Presenter.class).to(SavableFileTreePresenter.class).in(Singleton.class);
 		
-		bind(ITextInputView.class).to(TextInputView.class).in(Singleton.class);
-		bind(ITextInputView.Presenter.class).to(TextInputPresenter.class).in(Singleton.class);
-		bind(IMessageView.class).to(MessageView.class).in(Singleton.class);
-		bind(IMessageView.Presenter.class).to(MessagePresenter.class).in(Singleton.class);
-		bind(IMessageConfirmView.class).to(MessageConfirmView.class).in(Singleton.class);
-		bind(IMessageConfirmView.Presenter.class).to(MessageConfirmPresenter.class).in(Singleton.class);
+		bind(ITextInputView.class).to(TextInputView.class);
+		bind(ITextInputView.Presenter.class).to(TextInputPresenter.class);
+		bind(IMessageView.class).to(MessageView.class);
+		bind(IMessageView.Presenter.class).to(MessagePresenter.class);
+		bind(IMessageConfirmView.class).to(MessageConfirmView.class);
+		bind(IMessageConfirmView.Presenter.class).to(MessageConfirmPresenter.class);
 		
-		bind(IAnnotationReviewView.class).to(AnnotationReviewView.class).in(Singleton.class);
-		bind(IAnnotationReviewView.Presenter.class).to(AnnotationReviewPresenter.class).in(Singleton.class);
-		bind(ISearchView.class).to(SearchView.class).in(Singleton.class);
-		bind(ISearchView.Presenter.class).to(SearchPresenter.class).in(Singleton.class);
-		bind(IResultView.class).to(ResultView.class).in(Singleton.class);
-		bind(IResultView.Presenter.class).to(ResultPresenter.class).in(Singleton.class);
-		bind(IXMLEditorView.class).to(XMLEditorView.class).in(Singleton.class);
-		bind(IXMLEditorView.Presenter.class).to(XMLEditorPresenter.class).in(Singleton.class);
+		bind(IAnnotationReviewView.class).to(AnnotationReviewView.class);
+		bind(IAnnotationReviewView.Presenter.class).to(AnnotationReviewPresenter.class);
+		bind(ISearchView.class).to(SearchView.class);
+		bind(ISearchView.Presenter.class).to(SearchPresenter.class);
+		bind(IResultView.class).to(ResultView.class);
+		bind(IResultView.Presenter.class).to(ResultPresenter.class);
+		bind(IXMLEditorView.class).to(XMLEditorView.class);
+		bind(IXMLEditorView.Presenter.class).to(XMLEditorPresenter.class);
 		
 		bind(IMatrixGenerationInputView.class).to(MatrixGenerationInputView.class);
 		bind(IMatrixGenerationInputView.Presenter.class).to(MatrixGenerationInputPresenter.class);
@@ -207,8 +213,8 @@ public class ClientModule extends AbstractGinModule {
 		bind(IMatrixGenerationProcessView.Presenter.class).to(MatrixGenerationProcessPresenter.class);
 		bind(IMatrixGenerationReviewView.class).to(MatrixGenerationReviewView.class);
 		bind(IMatrixGenerationReviewView.Presenter.class).to(MatrixGenerationReviewPresenter.class);
-		bind(IReviewView.class).to(ReviewView.class).in(Singleton.class);
-		bind(IReviewView.Presenter.class).to(ReviewPresenter.class).in(Singleton.class);
+		bind(IReviewView.class).to(ReviewView.class);
+		bind(IReviewView.Presenter.class).to(ReviewPresenter.class);
 		bind(IMatrixGenerationOutputView.class).to(MatrixGenerationOutputView.class);
 		bind(IMatrixGenerationOutputView.Presenter.class).to(MatrixGenerationOutputPresenter.class);
 		
@@ -265,5 +271,34 @@ public class ClientModule extends AbstractGinModule {
 		
 		//misc
 		bind(FilePathShortener.class).in(Singleton.class);
+	}
+	
+	
+	public static class FileManagerDialogPresenterProvider implements Provider<IFileManagerDialogView.Presenter> {
+
+		private IManagableFileTreeView managableFileTreeView;
+		private IManagableFileTreeView.Presenter managableFileTreePresenter;
+		private IFileManagerDialogView fileManagerDialogView;
+		private IFileManagerDialogView.Presenter fileManagerDialogPresenter;
+		private IFileTreeView.Presenter fileTreePresenter;
+		private IFileTreeView fileTreeView;
+		
+		@Inject
+		public FileManagerDialogPresenterProvider(IFileServiceAsync fileService, FileTreeDecorator fileTreeDecorator, 
+				IMessageView.Presenter messagePresenter, ITextInputView.Presenter textInputPresenter) {
+			fileTreeView = new FileTreeView();
+			fileTreePresenter = new FileTreePresenter(fileTreeView, fileService, fileTreeDecorator);
+			managableFileTreeView = new ManagableFileTreeView(fileTreePresenter);			
+			managableFileTreePresenter = new ManagableFileTreePresenter(managableFileTreeView, fileTreePresenter, fileService, 
+					messagePresenter, textInputPresenter);
+			fileManagerDialogView = new FileManagerDialogView(managableFileTreePresenter);
+			fileManagerDialogPresenter = new FileManagerDialogPresenter(fileManagerDialogView, managableFileTreePresenter);
+		}
+		
+		@Override
+		public IFileManagerDialogView.Presenter get() {
+			return fileManagerDialogPresenter;
+		}
+		
 	}
 }
